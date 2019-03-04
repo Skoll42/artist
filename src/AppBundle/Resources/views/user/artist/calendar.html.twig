@@ -1,0 +1,66 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/profile-edit.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/calendar.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <section class="user-profile">
+        <div class="container">
+            <div class="row-offcanvas row-offcanvas-left">
+                {% include '@App/controls/user_left_menu.html.twig' %}
+                <div id="main" class="artist-calendar">
+                    <div class="col-md-12">
+                        <p class="d-lg-none">
+                            <button type="button" class="btn" data-toggle="offcanvas">
+                                User Menu
+                            </button>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-12 title">My Calendar</div>
+                            <hr />
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-sm-none">
+                                Mark your busy days by tapping
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="artist-calendar-wrapper" class="artist-calendar-edit"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <form action="{{ path('artist_edit_calendar', {'id': artist.user.id}) }}" class="calendar-form" id="calendar-form" method="post">
+                            <input type="hidden" name="busydates" value="" />
+                            <div class="row">
+                                <div class="col-12 margin-top-20">
+                                    <button type="submit" id="calendar-save-busy-dates-artist" class="col-xs-6 col-sm-4 float-right save-profile red-button full-width artist-book-now">Save Busy Dates</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let calendarEditable = true;
+        let events = JSON.parse('{{ events | raw }}');
+        let busy_dates = JSON.parse('{{ busy_dates | raw }}');
+    </script>
+    <script src="{{ asset('build/calendar.js') }}"></script>
+    <script src="{{ asset('build/profile-calendar.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle=offcanvas]').click(function() {
+                $('.row-offcanvas').toggleClass('active');
+            });
+        });
+    </script>
+{% endblock javascripts %}

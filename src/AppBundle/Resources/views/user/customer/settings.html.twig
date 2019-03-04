@@ -1,0 +1,104 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/profile-settings.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <section class="user-profile" style="min-height: 76.2vh;">
+
+        <div class="container">
+
+            <div class="row-offcanvas row-offcanvas-left">
+                {% include '@App/controls/user_left_menu.html.twig' %}
+                <div id="main">
+                    <div class="col-md-12">
+                        <p class="d-lg-none">
+                            <button type="button" class="btn" data-toggle="offcanvas">
+                                User Menu
+                            </button>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-12 title">Settings</div>
+                            <hr />
+                        </div>
+
+                        {{ form_start(form, {'method': 'post', 'action': path('customer_edit_settings', {'id': app.user.id}), 'attr': {'id':'customer-settings'}}) }}
+                            <div class="form-group row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 profile-label">Email</div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-input">
+                                    {{ form_widget(form.email, {'attr': {'class': 'artist-email'}, 'id': 'artist-email' }) }}
+                                </div>
+                            </div><br>
+
+                            <div class="form-group row password">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 profile-label">Current Password</div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-input input-group">
+                                    <input type="password" name="appbundle_user[current-artist-password]" class="current-artist-password" maxlength="128">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text show-pwd">
+                                            <img src="{{ asset('images/medicine.png') }}" alt="">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row password">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 profile-label">New Password</div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-input input-group">
+                                    <input type="password" name="appbundle_user[new-artist-password]" class="new-artist-password" maxlength="128">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text show-pwd">
+                                            <img src="{{ asset('images/medicine.png') }}" alt="">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row password">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 profile-label">Confirm Password</div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-input input-group">
+                                    <input type="password" name="appbundle_user[c-artist-password]" class="c-artist-password" maxlength="128">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text show-pwd">
+                                            <img src="{{ asset('images/medicine.png') }}" alt="">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row bottom-profile">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 profile-label"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 profile-success" style="color: #1c7430"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 profile-input">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="save-profile customer-settings">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/profile-settings.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            new ProfileSettings({
+                saveBtn: '.customer-settings',
+                form: '#customer-settings',
+            });
+        });
+    </script>
+{% endblock javascripts %}

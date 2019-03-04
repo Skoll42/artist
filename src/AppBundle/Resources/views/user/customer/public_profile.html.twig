@@ -1,0 +1,87 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/artist-page.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <section class="general-box no-background artist-public" style="min-height: 76.2vh;">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-3 col-sm-12 no-padding">
+                    <div class="col-md-12 mb-3 sm-text-center">
+                        <div class="main-image">
+                            <img alt="artist" class="img-fluid"  src="{{ customer.image }}">
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        {#AR-512#}
+                        {#<div class="col-12 text-center">
+                            <h3 class="font-weight-bold">
+                                <i class="icon-big-star big-icon-h3-align"></i>
+                                <span class="big-icon-content-centered">0</span>
+                            </h3>
+                        </div>#}
+                        {% if app.user is null %}
+                            <div class="col-12 margin-top-20">
+                                <button type="submit" class="save-profile red-button full-width send-message" data-id="{{ customer.user.id }}">Send Message</button>
+                            </div>
+                        {% else %}
+                            {% if app.request.attributes.get('id') != app.user.id and is_granted('ROLE_CUSTOMER') == false %}
+                                <div class="col-12 margin-top-20">
+                                    <a href="{{ path('artist_communication_chat', {'id': app.user.id, 'id_with': customer.user.id}) }}" class="save-profile red-button full-width" id="communication">Send Message</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="main" class="col-md-9 col-sm-12 pt-4">
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <h3 class="col-md-9 col-sm-7 col-xs-7 mb-0 pb-0 title">{{ customer.firstName ~ ' ' ~ customer.lastName }}</h3>
+
+                            {% if app.user is not null and  app.request.attributes.get('id') == app.user.id %}
+                                <div class="col-md-3 col-sm-5 col-xs-5 text-right">
+                                    <a href="{{ path('customer_edit', {'id': app.user.id}) }}" class="link d-inline-block pb-3 vr-top-m8">
+                                        <i class="icon icon-edit"></i>{{ 'customer.public.edit'|trans }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <hr />
+                        </div>
+
+                        <div class="row margin-top-20">
+                            <div class="col-12">
+                                <p class="line-height-25">
+                                    {{ customer.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if is_granted("ROLE_CUSTOMER") == false and is_granted("ROLE_ARTIST") == false %}
+        <script>
+            $(document).ready(function() {
+                $('.send-message').on('click', function () {
+                    $('body').find("#login-form").modal('show');
+                });
+            });
+        </script>
+    {% endif %}
+{% endblock javascripts %}

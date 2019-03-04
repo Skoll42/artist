@@ -1,0 +1,148 @@
+header:
+  menu:
+    become_artist: Registration
+    artist_list: Artists List
+    contact: Contact Us
+    login: Log In
+    logout: Log Out
+    edit_profile: Edit Profile
+    settings: Settings
+    bookings: My Bookings
+    communication: Communication <span>%count%</span>
+    calendar: Calendar
+    media: Media
+    payment: Payments Details
+    policy: Cancellation Policy
+
+slogan: Find and book your entertainment <a href="#">nextdoor</a> <br/> for any life occasions
+
+best_artist:
+  title: Artists near you
+  elem:
+    book_now: View Profile
+
+why_choose:
+  title: Why choose Artist NextDoor?
+  subtitle: We bring you closer to local talents
+  block:
+    first:
+      title: Events to Remember
+      subtitle: Unforgettable events start with Artist NextDoor.
+    second:
+      title: Local Entertaiment
+      subtitle: Discover talents in your local neighbourhood and create memories for people you care.
+    third:
+      title: People Like Us
+      subtitle: The solution will save time and make artist booking easier for everybody.
+
+best_events:
+  title: Best Events
+  subtitle: Life occasions are different so are your events
+  elem:
+    view_all: View all
+
+join:
+  title: Join <span>Artist</span> NextDoor
+  subtitle: Let your neighbors discover your talent and save the party Artist NextDoor!
+  elem:
+    become_artist: Become an Artist
+
+help:
+  title: How can we help you?
+  subtitle: Artist booking without costing time and fortune
+  text: There are different occasions in life when you have to book an artist.<br>You could simply need to entertain your guests or find an unique present to some of your dear family members, friends or co-workers. At the other end of the market, we have artists. Some of them wish to make an extra buck of their hobby or to be discovered.<br>In 2018, we're introducing new marketplace to give artists an opportunity to promote and sell their services to the people nextdoor, next city or around the world. Artist NextDoor provides a communication platform to establishing contact between artists and people like us.
+  elem:
+    top_link: There is always a talent in your local neighbourhood. Take a look to discover it.
+
+search:
+  result:
+    book: View Profile
+  placeholder:
+    artist_or_event: What artist or event ...
+
+
+login:
+  deleted: Sorry, your account is inactive. Please contact support.
+
+login.email.not.verified: This email address is not verified yet. <br> Please, check your inbox or click
+login.email.not.verified.link: Resend Email
+forgot.password.confirm.will.resend.link: Resend Email
+forgot.password.confirm.was.resend.link: Mail Was Sent
+
+artist:
+  public:
+    edit: Edit My Profile
+    category: Category
+    themes: Events
+    location: Location
+    tags: Tags
+    performance: Performance duration
+    about: About
+    requirements: Requirements
+    book_now: Book Now
+  action:
+    booking_attempt:
+      title: Please Register!
+      text: If you want to book or send message to %artist_name% you need to <a id="preregister-link" href="#">register</a> as a Customer
+
+  edit:
+    booking:
+      my: <span>My Bookings</span> <i>(%count%)</i>
+      accepted: <span>Accepted bookings</span>
+      archive: <span>Archive</span>
+      confirm:
+        title: Accept booking?
+        subtitle: By accepting the booking you commit to perform. In case of force majeure you have to inform User and cancel the booking.
+        button: Confirm booking
+      reject:
+        title: Reject booking?
+        subtitle: Are you sure you want to reject this booking?
+        button: Reject booking
+      cancel:
+        title: Cancel booking?
+        subtitle: Are you sure you want to cancel this booking?
+        button: Cancel booking
+      wrong:
+        title: Cancel booking
+        subtitle: Sorry, you can't cancel booking in less than 6 hours before event !
+        button: Close
+      comment:
+        title: Comment for booking
+        button: Close
+      location:
+        title: Event location
+        button: Close
+
+    communication:
+      my: Communication <span>%count%</span>
+      title: My Messages <span>%count%</span>
+      filter:
+        title: Filter by
+        value:
+          all: All Messages
+          unread: Unread
+          new: New
+
+customer:
+  public:
+    edit: Edit My Profile
+  edit:
+    booking:
+      my: <span>My Bookings</span>
+      accepted: <span>Accepted bookings</span>
+      archive: <span>Archive</span>
+  calendar:
+    cant_book: Sorry, %artist_name% is not available on requested date, please request other dates, contact %artist_name% directly or find other artists near you.
+
+feedback:
+  message:
+    sent: Your message has been sent!
+
+user:
+  message:
+    confirm:
+      title: Delete profile?
+      delete: Are You sure you want to delete your profile?
+      button: Delete
+    delete: We will delete your account according to <a target="_blank" href="%terms_url%">Terms and Conditions</a> and make account inactive.
+    deleted: Your accout was deleted !

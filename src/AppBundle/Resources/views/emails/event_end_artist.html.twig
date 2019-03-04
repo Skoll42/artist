@@ -1,0 +1,12 @@
+<p>Congratulations {{ artistName }}!</p>
+
+<p>
+    You've done your performance for {{ customerName }} Event on {{ date | date("Y-m-d H:i") }} and we hope it was great.<br />
+    Your payment will be processed and delivered to you on {{ date | date_modify("+7 day") | date("Y-m-d H:i") }}."
+</p>
+
+<p>
+    With best regards,<br />
+    Artist NextDoor<br />
+    Hope to see you soon again
+</p>

@@ -1,0 +1,246 @@
+@import "../../module/icons";
+
+.user-profile {
+  #main {
+    &.booking {
+      .nav-item {
+        margin-bottom: -1px;
+        margin-right: 3px;
+
+        @media screen and (max-width: 548px) {
+          width: 100%;
+        }
+
+        .nav-link {
+          border-color: #dbdbdb #dbdbdb #dbdbdb;
+          background-color: rgba(219, 219, 219, 0.2);
+          text-align: center;
+          font-size: 18px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 0.8px;
+          color: #1b2746;
+          line-height: 32px;
+          padding: 7px 20px;
+          border-bottom: none;
+          min-width: 210px;
+          text-decoration: none;
+
+          i {
+            text-decoration: none !important;
+            font-style: normal;
+          }
+
+          &.active {
+            background-color: #ffffff;
+            color: $white-red-color;
+
+            span {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      .tab-content {
+
+        .booking-item {
+          border-bottom: solid 1px #dbdbdb;
+          padding: 15px;
+          position: relative;
+
+          .user-image {
+            width: 70px;
+            height: 70px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            border-radius: 5px;
+            float: left;
+            margin-right: 15px;
+          }
+          .customer-data {
+            line-height: 25px;
+            margin: 10px 0;
+
+            .name {
+              width: 150px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+
+              a {
+                font-weight: bold;
+                letter-spacing: 0.4px;
+                color: #1c2d4d;
+                text-decoration: none !important;
+              }
+            }
+
+            .date {
+              font-size: 14px;
+              letter-spacing: 0.6px;
+              color: #ec2552;
+
+              span {
+                font-weight: 500;
+                color: #1d2c4d;
+              }
+            }
+
+            .start-time {
+              font-size: 14px;
+              letter-spacing: 0.6px;
+              color: #ec2552;
+
+              span {
+                font-weight: 500;
+                color: #1d2c4d;
+              }
+            }
+          }
+
+          .booking-data {
+            margin: 10px 0;
+            line-height: 26px;
+
+            .price {
+              font-size: 18px;
+              font-weight: 500;
+              letter-spacing: 0.4px;
+              color: #1d2c4d;
+            }
+
+            .status {
+              font-size: 14px;
+              font-weight: 500;
+              letter-spacing: 0.8px;
+              text-transform: capitalize;
+
+              &.pending {
+                color: #f05f00;
+              }
+              &.canceled {
+                color: #dd2f2f;
+              }
+              &.confirmed {
+                color: #44af69;
+              }
+              &.rejected {
+                color: #dd2f2f;
+              }
+            }
+          }
+          .booking-controls {
+            //float: right;
+            //position: absolute;
+            //right: 15px;
+            //top: 50%;
+            //margin-top: -20px;
+
+            .accept {
+              width: 36px;
+              height: 36px;
+              background: #44af69 url("../images/icons/white/ok.svg") no-repeat center;
+              border: 1px solid #44af69;
+              background-size: 16px;
+
+              &:hover {
+                background: #ffffff url("../images/icons/green/ok_hover.svg") no-repeat center;
+                background-size: 16px;
+              }
+            }
+
+            .archived {
+              width: 36px;
+              height: 36px;
+              border: 1px #1d2c4d solid;
+              background: #1d2c4d url("../images/icons/white/archive.svg") no-repeat center;
+              background-size: 22px;
+
+              &:hover {
+                background: #ffffff url("../images/icons/blue/archive_hover.svg") no-repeat center;
+                background-size: 22px;
+              }
+            }
+
+            .disabled {
+              width: 36px;
+              height: 36px;
+              border: 1px #dbdbdb solid !important;
+
+              &.ok {
+                background: #dbdbdb url("../images/icons/white/ok.svg") no-repeat center !important;
+                background-size: 16px !important;
+              }
+              &.cancel {
+                &.disabled {
+                  background: #dbdbdb url("../images/icons/white/ok.svg") no-repeat center !important;
+                  background-size: 16px !important;
+                }
+              }
+            }
+
+            .reject, .canceled, .customer-canceled {
+              width: 36px;
+              height: 36px;
+              background: #dd2f2f url("../images/icons/white/cancel_hover.svg") no-repeat center;
+              border: 1px solid #dd2f2f;
+              background-size: 16px;
+
+              &:hover {
+                background: #ffffff url("../images/icons/red/cancel.svg") no-repeat center;
+                background-size: 16px;
+              }
+            }
+
+            .location {
+              width: 36px;
+              height: 36px;
+              border: 1px #ec2552 solid;
+              background-color: #ffffff;
+              position: relative;
+
+              &:before {
+                top: 9px;
+                left: 9px;
+                background-size: contain;
+              }
+            }
+
+            .comment {
+              width: 36px;
+              height: 36px;
+              border: 1px #ec2552 solid;
+              background-color: #ffffff;
+              position: relative;
+
+              .icon {
+                left: 7px;
+                top: 2px;
+                background-size: 15px;
+              }
+            }
+
+            .send-message {
+              width: 130px;
+              height: 36px;
+              border-radius: 4px;
+              background-color: #ec2552;
+              border: 1px solid #ec2552;
+              color: white;
+              cursor: pointer;
+
+              &:hover {
+                color: #ec2552;
+                background-color: #ffffff;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,241 @@
+{% extends '@App/base.html.twig' %}
+
+{% set currentArtistLogged = (app.request.attributes.get('id') == app.user.id and is_granted('ROLE_ARTIST') == true) ? true : false %}
+{% set calendarHeaderText = (currentArtistLogged) ? 'Your Calendar' : 'Book Artist by selecting date' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/artist-page.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/calendar.css') }}">
+    {#hack for proper rendering out of 90 days range days in calendar#}
+    <style>
+        [data-outofrange="true"] {
+            color: {{ (currentArtistLogged) ? '#1d2c4d' : '#8d8d8d'}};
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+        .fc-future > .fc-day-number {
+            color: #1d2c4d;
+        }
+        .fc-past > .fc-day-number {
+            color: #1d2c4d;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <section class="general-box no-background artist-public">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-3 col-sm-12 no-padding">
+                    <div class="col-md-12 mb-3 sm-text-center">
+                        <div class="main-image">
+                            <img alt="artist" class="img-fluid"  src="{{ artist.image ? asset(artist.image) | imagine_filter('thumb_370_210') : asset('images/default_pic.jpg') }}">
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        {#AR-512#}
+                        {#<div class="col-4 text-center price">
+                            <h3 class="font-weight-bold">
+                                <i class="icon-big-star big-icon-h3-align"></i>
+                                <span class="big-icon-content-centered">0</span>
+                            </h3>
+                            <span class="color-light-gray font-weight-normal">
+                                2 reviews
+                            </span>
+                        </div>#}
+                        {% set price = (artist.price) ? artist.price : '0.00' %}
+                        <div class="col-8 text-center price">
+                            <h3 class="font-weight-bold">
+                                <i class="icon-big-wallet big-icon-h3-align"></i>
+                                <span class="big-icon-content-centered">{{ (price * platform_fee + price) | number_format(2, '.', '') }} kr</span>
+                            </h3>
+                            <span class="color-light-gray font-weight-normal">
+                                per performance
+                            </span>
+                        </div>
+                        {% if app.user is null %}
+                            <div class="col-12 margin-top-20">
+                                <button type="submit" class="save-profile red-button full-width artist-book-now" data-id="{{ artist.user.id }}">Send Message</button>
+                            </div>
+                            <div class="col-12 margin-top-20">
+                                <button type="submit" class="save-profile red-button full-width artist-book-now" data-id="{{ artist.user.id }}">Book Now</button>
+                            </div>
+                        {% else %}
+                            {% if app.request.attributes.get('id') != app.user.id %}
+                                <div class="col-12 margin-top-20">
+                                    <a href="{{ path('customer_communication_chat', {'id': app.user.id, 'id_with': artist.user.id}) }}" class="save-profile red-button full-width" id="communication">Send Message</a>
+                                </div>
+                                <div class="col-12 margin-top-20">
+                                    <button type="submit" class="save-profile red-button full-width artist-book-now" data-id="{{ artist.user.id }}">Book Now</button>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+                    {% if artist.user.youTubeVideo %}
+                        <div class="row no-margin-horizontal margin-top-40">
+                            <div class="col-12 text-center">
+                                <div class="youtube-video">
+                                    {% if artist.user.youTubeVideo matches '{https://youtu.be}' %}
+                                        <iframe width="100%" height="143" src="{{ artist.user.youTubeVideo | replace({'https://youtu.be': 'https://www.youtube.com/embed'}) }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    {% elseif artist.user.youTubeVideo matches '{https://www.youtube.com/watch}' %}
+                                        <iframe width="100%" height="143" src="{{ artist.user.youTubeVideo | replace({'https://www.youtube.com/watch?v=': 'https://www.youtube.com/embed/'}) }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% set cols = 2 %}
+                    {% for item in images %}
+                        {% if loop.index0 % cols == 0 %}
+                            <div class="row no-margin-horizontal margin-top-20 gallery">
+                        {% endif %}
+
+                            <div class="col-6 text-center">
+                                <a href="{{ asset(item.image) }}" class="mr-3 img-fluid gallery-item" data-toggle="lightbox" data-gallery="example-gallery" style="background-image: url('{{ asset(item.image) | imagine_filter('background_124_94') }}')"></a>
+                            </div>
+
+                        {% if (loop.index0 % cols == cols - 1 or loop.last) %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div id="main" class="col-md-9 col-sm-12 pt-4">
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <h3 class="col-md-9 col-sm-7 col-xs-7 mb-0 pb-0 title">{{ artist.name }}</h3>
+                            {% if app.user is not null and app.request.attributes.get('id') == app.user.id %}
+                                <div class="col-md-3 col-sm-5 col-xs-5 text-right">
+                                    <a href="{{ path('artist_edit', {'id': app.user.id}) }}" class="link d-inline-block pb-3 vr-top-m8">
+                                        <i class="icon icon-edit"></i>{{ 'artist.public.edit'|trans }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <hr />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-5">
+                                <p>
+                                    {{ 'artist.public.category'|trans }}: <span class="text-red">{{ category.name }}</span>
+                                </p>
+                            </div>
+                            <div class="col-7">
+                                <p>{{ 'artist.public.themes'|trans }}: <span class="text-red">{{ themes }}</span></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-5">
+                                <p>
+                                    {{ 'artist.public.location'|trans }}: <span class="text-red">{{ artist.location.name }}</span>
+                                </p>
+                            </div>
+                            <div class="col-7 tags">
+                                <p>{{ 'artist.public.tags'|trans }}:
+                                    <span class="text-red">
+                                        {% for item in tags %}
+                                            <span class="tag">{{ '#' ~ item.name }}</span>
+                                        {% endfor %}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-5">
+                                <p>
+                                    {{ 'artist.public.performance'|trans }}: <span class="text-red">{{ artist.time |replace({':': 'h '}) ~ 'm' }}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row margin-top-20">
+                            <div class="col-12">
+                                <h5>{{ 'artist.public.about'|trans }}</h5>
+                            </div>
+                            <hr>
+                            <div class="col-12">
+                                <p class="line-height-25">
+                                    {{ artist.description }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row margin-top-20">
+                            <div class="col-12">
+                                <h5>{{ 'artist.public.requirements'|trans }}</h5>
+                                <div class="row"><hr></div>
+                                <div class="row mt-2">
+                                    {% for item in requirements %}
+                                        {% if item.translate != 'other-requirements' %}
+                                            <div class="col-6 red-circle-list">{{ item.name }}</div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% if otherReq %}
+                                    <div class="row mt-2">
+                                        <div class="col-3 red-circle-list">Other requirements:</div>
+                                        <div class="col-9" style="word-break: break-all;">{{ otherReq }}</div>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 d-sm-none">
+                                <span>{{ calendarHeaderText }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="artist-calendar-wrapper"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        {#AR-512#}
+                        {#<img id="comments" src="{{ asset('images/COMMENTS.jpg') }}" style="margin-top: 50px; width: 100%" alt="">#}
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let artistLogged = {{ (is_granted("ROLE_ARTIST") and currentArtistLogged == false) ? 'true' : 'false' }};
+        let currentArtistLogged = {{ (currentArtistLogged) ? 'true' : 'false' }};
+        let artistId = {{ artist.user.id }};
+        let events = JSON.parse('{{ events | raw }}');
+        let calendarEditable = false;
+        let busy_dates = JSON.parse('{{ busy_dates | raw }}');
+        let calendarHeaderText = '{{ calendarHeaderText }}';
+    </script>
+    <script>
+        $(document).ready(function(){
+            new Artist({
+                bookBtn: ".artist-book-now",
+                bookModalElem: "#book-now-form",
+                loginModalElem: "#login-form",
+                cardElem: "#card-element",
+                logged: '{{ is_granted("ROLE_CUSTOMER") or is_granted("ROLE_ARTIST") }}',
+                stripePublic: '{{ stripe_public_api_key }}'
+            });
+        });
+    </script>
+    <script src="{{ asset('build/artist-page.js') }}"></script>
+    <script src="{{ asset('build/calendar.js') }}"></script>
+    <script src="{{ asset('build/view-calendar.js') }}"></script>
+{% endblock javascripts %}

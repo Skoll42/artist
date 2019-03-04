@@ -1,0 +1,56 @@
+{% set user = is_granted('ROLE_ARTIST') ? 'artist' : 'customer' %}
+
+<div id="sidebar" class="sidebar-offcanvas">
+    <div class="col-md-12">
+        <ul class="nav nav-pills nav-stacked">
+            <li>
+                <a href="{{ path(user ~ '_edit', {'id': app.user.id}) }}" class="{{ app.request.get('_route') == user ~ '_edit' ? 'active' : '' }}">
+                    <i class="icon icon-edit"></i> Edit Profile
+                </a>
+            </li>
+            <li>
+                <a href="{{ path(user ~ '_edit_settings', {'id': app.user.id}) }}"  class="{{ app.request.get('_route') == user ~ '_edit_settings' ? 'active' : '' }}">
+                    <i class="icon icon-settings"></i> Settings
+                </a>
+            </li>
+            <li>
+                <a href="{{ path(user ~ '_edit_communication', {'id': app.user.id}) }}" class="communication {{ app.request.get('_route') == user ~ '_edit_communication' ? 'active' : '' }}">
+                    <i class="icon icon-communication"></i> {{ 'artist.edit.communication.my' | trans({'%count%': '<i></i>'}) | raw }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path(user ~ '_edit_booking_all', {'id': app.user.id}) }}" class="{{ app.request.get('_route') == user ~ '_edit_booking_all' ? 'active' : '' }}">
+                    <i class="icon icon-history"></i> My Bookings {{ artist is defined ? '(' ~ artist.bookings ~ ')' : '' }}
+                </a>
+            </li>
+
+            {% if is_granted('ROLE_ARTIST') %}
+                <li>
+                    <a href="{{ path(user ~ '_edit_calendar', {'id': app.user.id}) }}" id="calendar" class="{{ app.request.get('_route') == user ~ '_edit_calendar' ? 'active' : '' }}">
+                        <i class="icon icon-calendar"></i> Calendar
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path(user ~ '_edit_media', {'id': app.user.id}) }}" class="{{ app.request.get('_route') == user ~ '_edit_media' ? 'active' : '' }}">
+                        <i class="icon icon-media"></i> Media
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path(user ~ '_edit_payment', {'id': app.user.id}) }}" class="{{ app.request.get('_route') == user ~ '_edit_payment' ? 'active' : '' }}">
+                        <i class="icon icon-payments"></i> Payments Details
+                    </a>
+                </li>
+                {#AR-512#}
+                {#<li>
+                    <a href="{{ path(user ~ '_edit_policy', {'id': app.user.id}) }}" id="policy" class="{{ app.request.get('_route') == user ~ '_edit_policy' ? 'active' : '' }}">
+                        <i class="icon icon-cancel-policy"></i> Cancellation Policy
+                    </a>
+                </li>#}
+            {% endif %}
+
+            <li>
+                <a href="{{ path(user ~ '_profile_public', {'id': app.user.id}) }}" class="view-public">Preview My Profile</a>
+            </li>
+        </ul>
+    </div>
+</div>

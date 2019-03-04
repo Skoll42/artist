@@ -1,0 +1,61 @@
+{% set stripe_status = (stripe_status is defined) ? stripe_status : 'false' %}
+<div class="collapse navbar-collapse" id="navbarTopContent">
+    <ul class="navbar-nav ml-auto">
+        {% if not is_granted('ROLE_CUSTOMER') and not is_granted('ROLE_ARTIST') %}
+            <li class="nav-item">
+                <a class="nav-link become-artist" href="#" data-toggle="modal"
+                   data-dismiss="modal" data-target="#signup-form">
+                    {{ 'header.menu.become_artist'|trans }}
+                </a>
+            </li>
+        {% endif %}
+        {#AR-512#}
+        {#<li class="nav-item">
+            <a id="artist-list" class="nav-link" href="#">{{ 'header.menu.artist_list'|trans }}</a>
+        </li>#}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('contact-us') }}">{{ 'header.menu.contact'|trans }}</a>
+        </li>
+        <li class="nav-item dropdown language">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ locale == 'en' ? "English" : "Norwegian" }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                <a onclick="return false" href="#" class="dropdown-item active">English</a>
+
+                {# TODO: Uncommended it when implements one more language#}
+                {#{% for lang, url in langArr %}#}
+                    {#<a {{ url == '' ? ('onclick="return false"')|raw : '' }}#}
+                            {#href="{{ url }}"#}
+                            {#class="dropdown-item {{ url == '' ? 'active' : '' }}">{{ lang == "en" ? "English" : "Norwegian" }}</a>#}
+                {#{% endfor %}#}
+            </div>
+        </li>
+        <li class="nav-item dropdown currency">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                NOK
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                <a class="dropdown-item" href="#">NOK</a>
+                {#<a class="dropdown-item" href="#">USD</a>#}
+            </div>
+        </li>
+        {% if is_granted('ROLE_CUSTOMER') or is_granted('ROLE_ARTIST') %}
+            {% if(is_granted('ROLE_ARTIST')) %}
+                {% if(stripe_status == 'true') %}
+                    {% include '@App/user/artist/header_menu_dropdown.html.twig' %}
+                {% else %}
+                    {% include '@App/user/artist/header_menu_dropdown_limited.html.twig' %}
+                {% endif %}
+            {% endif %}
+            {% if(is_granted('ROLE_CUSTOMER')) %}
+                {% include '@App/user/customer/header_menu_dropdown.html.twig' %}
+            {% endif %}
+        {% else %}
+            <li class="nav-item sing-in">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#login-form">{{ 'header.menu.login'|trans }}</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

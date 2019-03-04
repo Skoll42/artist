@@ -1,0 +1,18 @@
+{% set user = is_granted('ROLE_ARTIST') ? 'artist' : 'customer' %}
+{% set name = artist.name ? artist.name : artist.user.username %}
+<li class="nav-item dropdown user-menu sing-out">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ name }}</a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+        <a href="{{ path(user ~ '_edit', {'id': app.user.id}) }}"
+           class="dropdown-item {{ app.request.get('_route') == user ~ '_edit' ? 'active' : '' }}">
+            <i class="icon icon-edit"></i> {{ 'header.menu.edit_profile'|trans }}
+        </a>
+        {% if ((edit_profile is defined) and (edit_profile == 'true') and (user == 'artist')) %}
+            <a href="{{ path(user ~ '_edit_payment', {'id': app.user.id}) }}"
+               class="dropdown-item {{ app.request.get('_route') == user ~ '_edit_payment' ? 'active' : '' }}">
+                <i class="icon icon-payments"></i> {{ 'header.menu.payment'|trans }}
+            </a>
+        {% endif %}
+        <a class="dropdown-item logout" href="{{ path('fos_user_security_logout') }}">{{ 'header.menu.logout'|trans }}</a>
+    </div>
+</li>

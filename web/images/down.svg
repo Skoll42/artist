@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="4px" viewBox="0 0 7 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>D099141A-CB14-4181-BD96-0EA94A868488</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="menu" transform="translate(-1183.000000, -44.000000)">
+            <rect id="Rectangle-11" fill="#1D2C4D" x="0" y="0" width="1440" height="90"></rect>
+            <g transform="translate(731.000000, 28.000000)">
+                <g id="separator" transform="translate(322.000000, 0.000000)"></g>
+                <g id="countr-and-currency" transform="translate(334.000000, 7.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g id="down-arrow-(2)" transform="translate(57.000000, 9.000000)">
+                        <path d="M67.9283776,0.077294686 C67.8318989,-0.0257648953 67.675121,-0.0257648953 67.5786422,0.077294686 L64.5033833,3.36876006 L61.4220944,0.077294686 C61.3256157,-0.0257648953 61.1688377,-0.0257648953 61.072359,0.077294686 C60.9758803,0.180354267 60.9758803,0.347826087 61.072359,0.450885668 L64.3224857,3.92270531 C64.370725,3.9742351 64.4310242,4 64.4973533,4 C64.5576525,4 64.6239817,3.9742351 64.672221,3.92270531 L67.9223477,0.450885668 C68.0248563,0.347826087 68.0248563,0.180354267 67.9283776,0.077294686 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,21 @@
+<div class="modal fade" id="location-booking" tabindex="-1" role="dialog" aria-labelledby="signinFormLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+            </div>
+
+            <div class="modal-body">
+                <div class="title">{{ 'artist.edit.booking.location.title' | trans }}</div>
+                <div class="subtitle">
+                    {{ booking.address }}
+                </div>
+
+                <button type="button" class="btn-signup close" data-dismiss="modal">{{ 'artist.edit.booking.location.button' | trans }}</button>
+
+            </div>
+        </div>
+    </div>
+</div>

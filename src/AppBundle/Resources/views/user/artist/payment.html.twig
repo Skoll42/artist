@@ -1,0 +1,248 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/profile-payment.css') }}">
+{% endblock stylesheets %}
+
+
+{% set stripe_status = (stripe_status is defined) ? stripe_status : 'false' %}
+{% block content %}
+    {% set verified = false %}
+    {% set accStatus = 'not created' %}
+
+    {% if account is defined and account is not null %}
+        {% set accStatus = account.legal_entity.verification.status %}
+        {% if accStatus == 'verified' or accStatus == 'pending' %}
+            {% set verified = true %}
+        {% endif %}
+    {% endif %}
+
+    <section class="user-profile" style="min-height: 76.2vh;">
+        <div class="container">
+
+            <div class="row-offcanvas row-offcanvas-left">
+                {% if(stripe_status == 'true') %}
+                    {% include '@App/controls/user_left_menu.html.twig' %}
+                {% else %}
+                    {% include '@App/user/artist/left_menu_limited.html.twig' %}
+                {% endif %}
+                <div id="main">
+                    <div class="col-md-12">
+                        <p class="d-lg-none">
+                            <button type="button" class="btn" data-toggle="offcanvas">
+                                User Menu
+                            </button>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-6 title">Payment Details</div>
+                            <div class="col-1"></div>
+                            <div class="col-3" style="line-height: 40px;">Pending: {{ balance.pending is defined ? (balance.pending[0].amount / 100)|number_format(2, '.', ',') : '0' }} kr</div>
+                            <div class="col-2">
+                                <a target="_blank" href="https://stripe.com/"><img src="{{ asset('images/payment-logo.png') }}" style="width: 90px; margin-top: -25px;"></a>
+                            </div>
+                            {# TODO: Uncommended it when implementation #}
+                            {#<div class="col-3">Total Balance: {{ balance.available is defined ? (balance.available[0].amount / 100)|number_format(2, '.', ',') : '0' }} kr</div>#}
+                            <hr />
+                        </div>
+
+                        {% if saved is defined and saved %}
+                        <div class="row">
+                            <div class="col-12" style="color: green; font-size: 18px; text-align: center;">
+                                Payment details are saved successfully.
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {{ form_start(form, {'method': 'post', 'attr': {'id':'payment-form'}}) }}
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row {{ 'first_name' in errors.param ? 'is-invalid' : '' }}">
+                                        <div class="col-12 profile-label">First Name</div>
+                                        <div class="col-12 profile-input">
+                                            {{ form_widget(form.first_name, {'attr': {'class': 'artist-first-name form-control' , 'placeholder': 'First Name'}, 'id': 'artist-first-name', 'disabled': verified, 'value': verified ? account.legal_entity.first_name : artist.firstName}) }}
+                                        </div>
+                                        {% if 'first_name' in errors.param %}
+                                            <div class="col-12 invalid-feedback">{{ errors.message }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row {{ 'first_name' in errors.param ? 'is-invalid' : '' }}">
+                                        <div class="col-12 profile-label">Last Name</div>
+                                        <div class="col-12 profile-input">
+                                            {{ form_widget(form.last_name, {'attr': {'class': 'artist-last-name form-control', 'placeholder': 'Last Name'}, 'id': 'artist-last-name', 'disabled': verified, 'value': verified ? account.legal_entity.last_name : artist.lastName}) }}
+                                        </div>
+                                        {% if 'last_name' in errors.param %}
+                                            <div class="col-12 invalid-feedback">{{ errors.message }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row {{ errors.param.birthday is defined or 'year' in errors.param or 'day' in errors.param or 'month' in errors.param ? 'is-invalid' : '' }}">
+                                        <div class="col-12 profile-label">Date Of Birth</div>
+                                        <div class="col-12 profile-input">
+                                            {% set birthday = "" %}
+                                            {% if verified %}
+                                                {% set birthday = account.legal_entity.dob.month ~ '/' ~ account.legal_entity.dob.day ~ '/' ~ account.legal_entity.dob.year %}
+                                            {% endif %}
+                                            {{ form_widget(form.birthday, {'attr': {'class': 'artist-birthday form-control', 'placeholder': 'Date OF Birth'}, 'id': 'artist-birthday', 'disabled': verified, 'value': birthday}) }}
+                                        </div>
+                                        {% if errors.param.birthday is defined or 'year' in errors.param or 'day' in errors.param or 'month' in errors.param %}
+                                            <div class="col-12 invalid-feedback">{{ errors.param.birthday.0 }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row {{ 'country' in errors.param ? 'is-invalid' : '' }}">
+                                        <div class="col-12 profile-label">Country</div>
+                                        <div class="col-12 profile-input">
+                                            {{ form_widget(form.country, {'attr': {'class': 'artist-country form-control', 'placeholder': 'Country'}, 'id': 'artist-country', 'value': 'Norway'}) }}
+                                        </div>
+                                        {% if 'country' in errors.param %}
+                                            <div class="col-12 invalid-feedback">{{ errors.message }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group row {{ 'city' in errors.param ? 'is-invalid' : '' }}">
+                                                <div class="col-12 profile-label">City</div>
+                                                <div class="col-12 profile-input">
+                                                    {{ form_widget(form.city, {'attr': {'class': 'artist-city form-control', 'placeholder': 'City'}, 'id': 'artist-city', 'value': verified ? account.legal_entity.address.city : (artist.location ? artist.location.name : '')}) }}
+                                                </div>
+                                                {% if 'city' in errors.param %}
+                                                    <div class="col-12 invalid-feedback">{{ errors.message }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group row {{ 'postal_code' in errors.param ? 'is-invalid' : '' }}">
+                                                <div class="col-12 profile-label">Postal Code</div>
+                                                <div class="col-12 profile-input">
+                                                    {{ form_widget(form.postal_code, {'attr': {'class': 'artist-postal-code form-control', 'placeholder': 'Postal Code'}, 'id': 'artist-postal-code', 'value': verified ? account.legal_entity.address.postal_code : ''}) }}
+                                                </div>
+                                                {% if 'postal_code' in errors.param %}
+                                                    <div class="col-12 invalid-feedback">{{ errors.message }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group row {{ 'line1' in errors.param ? 'is-invalid' : '' }}">
+                                        <div class="col-12 profile-label">Address</div>
+                                        <div class="col-12 profile-input">
+                                            {{ form_widget(form.address, {'attr': {'class': 'artist-address form-control', 'placeholder': 'Address'}, 'id': 'artist-address', 'value':  verified ? account.legal_entity.address.line1 : ''}) }}
+                                        </div>
+                                        {% if 'line1' in errors.param %}
+                                            <div class="col-12 invalid-feedback">{{ errors.message }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group row {{ errors.param.iban is defined or 'account_number' in errors.param ? 'is-invalid' : '' }}">
+                                        <div class="col-12 profile-label">
+                                            IBAN <span class="tool-help" data-title="<a target='blank' href='https://no.wikipedia.org/wiki/IBAN'>IBAN</a> is the International Bank Account Number. You use IBAN to get international payments from clients. Every person with bank account has an IBAN. You can find IBAN under your account information, you can google IBAN or you can use this <a target='blank' href='https://www.sparebank1.no/nb/nord-norge/privat/kundeservice/verktoy/iban-og-swift.html'>link</a>. We use the international payment solution <a target='blank' href='https://stripe.com/'>Stripe</a>. That’s why Stripe collects an international bank account number or IBAN">?</span>
+                                        </div>
+                                        <div class="col-12 profile-input">
+                                            {{ form_widget(form.iban, {'attr': {'class': 'artist-iban form-control', 'placeholder': 'NO89370400440532013000'}, 'id': 'artist-iban'}) }}
+                                        </div>
+                                        {% if errors.param.iban is defined or 'account_number' in errors.param %}
+                                            <div class="col-12 invalid-feedback">{{ errors.param.iban.0 }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group row {{ 'document' in errors.param ? 'is-invalid' : '' }}">
+                                        <div class="col-12 profile-label">
+                                            ID Photo (Passport or Driver License)
+                                            <span class="tool-help" data-title="Stripe collects your ID for identification purposes. Stripe requests a copy of your passport or driving license with a picture">?</span>
+                                        </div>
+                                        <div class="col-12 profile-input">
+                                            {{ form_widget(form.photo, {'attr': {'class': 'artist-photo form-control'}, 'id': 'artist-photo', 'disabled': verified}) }}
+                                        </div>
+                                        {% if 'document' in errors.param %}
+                                            <div class="col-12 invalid-feedback">{{ errors.message }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.email, {'attr': {'class': 'artist-email'}, 'id': 'artist-email form-control', 'value': artist.user.email }) }}
+                            {{ form_widget(form.phone, {'attr': {'class': 'artist-phone'}, 'id': 'artist-phone form-control', 'value': artist.phone ? '+47' ~ artist.phone : '' }) }}
+
+                            <div class="row bottom-profile">
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7 col-xl-7 profile-label">
+                                    <div class="row">
+                                        {% if accStatus is not empty %}
+                                            <div class="col-12 status {{ accStatus }}">
+                                                Account status: <span>{{ accStatus }}.</span>{{ (accStatus == 'unverified' ? '<br />If account is not verified in 6 hours , please, contact support!' : '') | raw }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5 col-xl-5 profile-input">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xl-8"></div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                                            <button type="submit" class="save-profile payment-profile">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/profile-payment.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#artist-birthday').datepicker({
+                startView: 2,
+                maxViewMode: 2,
+                autoclose: true
+            });
+
+            $('body').on('click', function (e) {
+                $('.tool-help').tooltip('dispose');
+
+                if($(e.target).hasClass('tool-help')) {
+                    $(e.target).tooltip({
+                        trigger: 'click',
+                        html: true,
+                        placement: 'top'
+                    });
+                    $(e.target).tooltip('toggle');
+                }
+            })
+        });
+
+        $(document).ready(function () {
+            $('[data-toggle=offcanvas]').click(function() {
+                $('.row-offcanvas').toggleClass('active');
+            });
+        });
+    </script>
+{% endblock javascripts %}

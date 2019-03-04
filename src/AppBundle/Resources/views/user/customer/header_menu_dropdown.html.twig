@@ -1,0 +1,27 @@
+{% set user = 'customer' %}
+{% set name = customer.firstName and customer.lastName ? customer.firstName ~ ' ' ~ customer.lastName : customer.user.username %}
+<li class="nav-item dropdown user-menu sing-out">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ name }}</a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+        <a href="{{ path(user ~ '_edit', {'id': app.user.id}) }}"
+           class="dropdown-item {{ app.request.get('_route') == user ~ '_edit' ? 'active' : '' }}">
+            <i class="icon icon-edit"></i> {{ 'header.menu.edit_profile'|trans }}
+        </a>
+
+        <a href="{{ path(user ~ '_edit_settings', {'id': app.user.id}) }}"
+           class="dropdown-item {{ app.request.get('_route') == user ~ '_edit_settings' ? 'active' : '' }}">
+            <i class="icon icon-settings"></i> {{ 'header.menu.settings'|trans }}
+        </a>
+
+        <a href="{{ path(user ~ '_edit_booking_all', {'id': app.user.id}) }}"
+           class="dropdown-item {{ app.request.get('_route') == user ~ '_edit_booking_all' ? 'active' : '' }}">
+            <i class="icon icon-history"></i> {{ 'header.menu.bookings'|trans }}
+        </a>
+
+        <a href="{{ path(user ~ '_edit_communication', {'id': app.user.id}) }}"
+           class="dropdown-item communication {{ app.request.get('_route') == user ~ '_edit_communication' ? 'active' : '' }}">
+            <i class="icon icon-communication"></i> {{ 'header.menu.communication' | trans({'%count%': '<i></i>'}) | raw }}
+        </a>
+        <a class="dropdown-item logout" href="{{ path('fos_user_security_logout') }}">{{ 'header.menu.logout'|trans }}</a>
+    </div>
+</li>

@@ -1,0 +1,129 @@
+//colors
+$color_heavy_metal_approx: #2d2e2e;
+$color_celeste_approx: #ccc;
+$mine_shaft_35: rgba(50,50,50,0.35);
+$color_black_haze_approx: #f6f6f6;
+$white: #ffffff;
+$black: #000;
+
+//fonts
+$font_0: arial;
+
+//urls
+$url_0: url(../images/arrow.png);
+$url_1: url(../images/top_arr.png);
+
+//@extend-elements
+//original selectors
+//.ti_tx, .mi_tx, .mer_tx
+%extend_1 {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+//original selectors
+//.time, .mins, .meridian
+%extend_2 {
+  width: 45px;
+  float: left;
+  margin: 0 10px;
+  font-size: 20px;
+  color: $color_heavy_metal_approx;
+  font-family: $font_0;
+  font-weight: 700;
+}
+
+//original selectors
+//.prev, .next
+%extend_3 {
+  cursor: pointer;
+  padding: 18px;
+  width: 28%;
+  border: 1px solid $color_celeste_approx;
+  margin: auto;
+  background: $url_0 no-repeat;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 5px;
+}
+
+
+.ti_tx {
+  @extend %extend_1;
+}
+.mi_tx {
+  @extend %extend_1;
+}
+.mer_tx {
+  @extend %extend_1;
+}
+.time {
+  @extend %extend_2;
+}
+.mins {
+  @extend %extend_2;
+}
+.meridian {
+  @extend %extend_2;
+}
+
+.timepicker_wrap {
+  .prev {
+    @extend %extend_3;
+    background-position: 50% -50%;
+    &:hover {
+      background-color: $color_celeste_approx;
+    }
+  }
+  .next {
+    @extend %extend_3;
+    background-position: 50% 150%;
+    &:hover {
+      background-color: $color_celeste_approx;
+    }
+  }
+}
+.time_pick {
+  position: relative;
+}
+.timepicker_wrap {
+  padding: 10px;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 5px;
+  z-index: 998;
+  display: none;
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 2px 2px 5px 0 $mine_shaft_35;
+  background: #FFFFFF;
+  border: 1px solid $color_celeste_approx;
+  float: left;
+  position: absolute;
+  top: 27px;
+  left: 0;
+}
+.arrow_top {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: $url_1 no-repeat;
+  width: 18px;
+  height: 10px;
+  z-index: 999;
+}
+input.timepicki-input {
+  background: none repeat scroll 0 0 $white;
+  border: 1px solid $color_celeste_approx;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 5px 5px 5px 5px;
+  float: none;
+  margin: 0;
+  text-align: center;
+  width: 70%;
+  font-size: 14px;
+  font-weight: bold;
+}
+a.reset_time {
+  float: left;
+  margin-top: 5px;
+  color: $black;
+}

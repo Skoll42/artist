@@ -1,0 +1,19 @@
+{% set user = is_granted('ROLE_ARTIST') ? 'artist' : 'customer' %}
+<div id="sidebar" class="sidebar-offcanvas">
+    <div class="col-md-12">
+        <ul class="nav nav-pills nav-stacked">
+            <li>
+                <a href="{{ path(user ~ '_edit', {'id': app.user.id}) }}" class="{{ app.request.get('_route') == user ~ '_edit' ? 'active' : '' }}">
+                    <i class="icon icon-edit"></i> Edit Profile
+                </a>
+            </li>
+            {% if ((edit_profile is defined) and (edit_profile == 'true') and (user == 'artist')) %}
+            <li>
+                <a href="{{ path(user ~ '_edit_payment', {'id': app.user.id}) }}" class="{{ app.request.get('_route') == user ~ '_edit_payment' ? 'active' : '' }}">
+                    <i class="icon icon-payments"></i> Payments Details
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

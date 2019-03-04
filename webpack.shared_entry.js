@@ -1,0 +1,10 @@
+require('jquery');
+require('webpack-jquery-ui');
+require('bootstrap');
+require('./src/AppBundle/Resources/assets/js/jquery.init.js');
+require('./src/AppBundle/Resources/assets/js/libs/jquery.validate.min.js');
+require('./src/AppBundle/Resources/assets/js/libs/jquery.ui.touch-punch.min.js');
+require('./src/AppBundle/Resources/assets/js/libs/timepicki.js')
+require('bootstrap/scss/bootstrap.scss');
+require('./src/AppBundle/Resources/assets/scss/main.scss');
+require('./src/AppBundle/Resources/assets/scss/libs/timepicki.scss');

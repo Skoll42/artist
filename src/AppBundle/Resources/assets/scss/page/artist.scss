@@ -1,0 +1,122 @@
+@import '../module/icons';
+
+.artist-public {
+  .price {
+    font-size: 24px;
+
+    h3 {
+      font-size: 85%;
+    }
+
+    >span {
+      font-size: 14px;
+    }
+  }
+  .main-image {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .youtube-video {
+    border-radius: 5px;
+    overflow: hidden;
+    height: 140px;
+  }
+  .gallery {
+    .gallery-item {
+      width: 100%;
+      min-height: 120px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 5px;
+      display: block;
+    }
+  }
+  .tags {
+    .tag {
+      display: inline-block;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      position: relative;
+      top: 4px;
+    }
+  }
+  .red-circle-list {
+    font-weight: 300;
+    padding-left: 40px;
+    position: relative;
+    margin-bottom: 15px;
+
+    &:before {
+      content: "";
+      background-color: $white-red-color;
+      font-size: 0;
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      top: 4px;
+      left: 15px;
+    }
+  }
+}
+
+.general-box {
+  padding: 35px 0;
+
+  &.no-background {
+    background-color: $color-white;
+
+    #main {
+      border: solid 1px $color-white;
+      padding: 0 0;
+
+      .title {
+        font-size: 24px;
+        padding-bottom: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      a.link{
+        color: #1d2c4d;
+        font-size: 14px;
+        text-decoration: underline;
+      }
+
+      .icon {
+        position: relative;
+        display: inline-block;
+        top: 9px;
+        right: 5px;
+        width: 20px;
+        height: 30px;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        &.icon-edit {
+          background-image: url("../images/icons/red/edit.svg");
+        }
+      }
+
+      hr {
+        margin: 0 15px 20px 15px;
+      }
+    }
+  }
+
+  hr {
+    width: 100%;
+    border-top: 1px solid #dbdbdb;
+    margin: 0 0 20px 0;
+  }
+
+  .vr-top-m8 {
+    position: relative;
+    top: -8px;
+  }
+
+}

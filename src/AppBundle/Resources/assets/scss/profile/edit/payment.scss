@@ -1,0 +1,33 @@
+@import "../../module/icons";
+
+.user-profile {
+  #main {
+    .profile-label {
+
+      .status {
+        color: #dbdbdb;
+        padding: 0 25px;
+
+        &.verified {
+          span {
+            color: green;
+          }
+        }
+        &.pending {
+          span {
+            color: #dbdbdb;
+          }
+        }
+        &.unverified {
+          span {
+            color: red;
+          }
+        }
+      }
+    }
+
+    .profile-checked {
+      padding: 12px 0;
+    }
+  }
+}

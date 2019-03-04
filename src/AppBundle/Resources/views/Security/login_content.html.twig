@@ -1,0 +1,112 @@
+<!-- MODAL LOGIN -->
+
+<div class="modal fade" id="login-form" tabindex="-1" role="dialog" aria-labelledby="loginFormLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+                <div class="title">Log In</div>
+                <div class="subtitle">
+                    Welcome Back, Please login to your account.
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ path("fos_user_security_check") }}" method="post" id="login">
+
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    {% endif %}
+
+                    <div class="form-group row">
+                        <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 input-parent">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <img src="{{ asset('images/mail-icon.svg') }}" alt="">
+                                </span>
+                            </div>
+                            <input class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" type="email"
+                                   placeholder="Email Address"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 input-parent"
+                             id="show_hide_password">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <img src="{{ asset('images/lock.svg') }}" alt="">
+                                </span>
+                            </div>
+                            <input class="form-control border-right-0" id="reg-password" name="_password" required="required" autocomplete="current-password" type="password"
+                                   placeholder="Password"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text show-pwd">
+                                    <img src="{{ asset('images/medicine.png') }}" alt="">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="custom-controls-stacked d-block">
+                                <label class="custom-control overflow-checkbox">
+                                    <input type="checkbox" name="_remember_me" class="overflow-control-input" value="on" id="remember">
+                                    <span class="overflow-control-indicator"></span>
+                                    <label class="remember" for="remember">Remember me</label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login" name="_submit">Log in</button>
+                </form>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="forgot-password" id="forgot-modal-lnk">
+                            <span class="frg-pwd-text">Forgot Password?</span>
+                        </p>
+                    </div>
+                </div>
+                {#AR-512#}
+                {#<div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="signup-or-separator">
+                            <span class="h6 signup-or-separator--text">or</span>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <button class="btn-fb" id="fb">
+                            <i class="c-icon facebook pull-left" aria-hidden="true"></i>
+                            Log in with Facebook
+                        </button>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <button class="btn-gp" id="google">
+                            <i class="c-icon google-plus pull-left" aria-hidden="true"></i>
+                            Log in with Google
+                        </button>
+                    </div>
+                </div>#}
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        Don’t have an account? <a href="#" class="btn-gst become-customer" data-toggle="modal"
+                                                  data-dismiss="modal" data-target="#signup-form">Sign
+                            Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL LOGIN ENDS -->

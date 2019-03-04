@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="no-js before-run" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+    {% block metatags %}
+        <title>{{ projectName }}</title>
+        <meta name="description" content="{{ projectName }}">
+        <meta name="author" content="vector-software">
+    {% endblock metatags %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {% block fonts %}
+        <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,900" rel="stylesheet">
+    {% endblock fonts %}
+
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/vendor.js') }}"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    {% endblock stylesheets %}
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="{{ cookiebot_key }}" type="text/javascript" async></script>
+    {% if app.environment == 'prod' %}
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-K5F7ZNZ');</script>
+        <!-- End Google Tag Manager -->
+    {% endif %}
+</head>
+
+<body>
+{% if app.environment == 'prod' %}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5F7ZNZ"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+{% endif %}
+{% block header %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light top-menu">
+            <div class="container">
+                <a class="navbar-brand logo" href="{{ path('index') }}">
+                    <img src="{{ asset('images/logo_artist.svg') }}" alt="">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTopContent" aria-controls="navbarTopContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                {{ render(controller('AppBundle:Default:menu', {'_route': app.request.get('_route')})) }}
+            </div>
+        </nav>
+    </header>
+{% endblock header %}
+
+{% block content %}{% endblock content %}
+
+<div class="preload">
+    <img src="{{ asset('images/loader.gif') }}">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- MODAL SUCCESS REGISTRATION -->
+            <div id="registr-confirm-modal-box"></div>
+            <!-- MODAL SUCCESS REGISTRATION ENDS -->
+
+
+            <!-- MODAL FORGOT PASSWORD -->
+            <div id="forgot-pass-modal-box"></div>
+            <!-- MODAL FORGOT PASSWORD ENDS-->
+
+            <!-- MODAL CONFIRM FORGOT PASSWORD -->
+            <div id="confirm-forgot-modal-box"></div>
+            <!-- MODAL CONFIRM FORGOT PASSWORD -->
+
+        </div>
+    </div>
+</div>
+
+{% block footer %}
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-5 col-lg-3 logo">
+                    <div>
+                        <a class="navbar-brand" href="{{ path('index') }}">
+                            <img src="{{ asset('images/logo_artist.svg') }}" alt="">
+                        </a>
+                        <div class="d-none d-md-block copyright">
+                            © {{ 'now' | date('Y') }} Artist Next Door. All rights reserved.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7 col-lg-9 footer-menu">
+                    <ul class="ml-auto">
+                        <li class="nav-item title">Legals</li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('privacy_policy') }}">Privacy Policy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('terms_and_conditions') }}">Terms and Conditions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('terms_and_conditions') }}#sale_cancellation">Buy, Sale and Cancellation</a>
+                        </li>
+                    </ul>
+                    <ul class="ml-auto">
+                        <li class="nav-item title">Contact Us</li>
+                        <li class="nav-item address">
+                            <a class="nav-link" href="#">{{ address }}</a>
+                        </li>
+                        <li class="nav-item email">
+                            <a class="nav-link" href="mailto:artist@your-nextdoor.no">artist@your-nextdoor.no</a>
+                        </li>
+                        <li class="nav-item socials">
+                            <a target="_blank" href="https://www.instagram.com/artistnextdoornorge/" id="inst" class="inst"></a>
+                            <a target="_blank" href="https://www.facebook.com/artistnextdoornorge/" id="fb" class="fb"></a>
+                            <a href="#" id="tw" class="tw"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-md-none copyright">
+                    © {{ 'now' | date('Y') }} Artist Next Door. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock footer %}
+
+{{ render(controller('AppBundle:Registration:register')) }}
+{{ render(controller('AppBundle:Login:login')) }}
+
+{% block javascripts %}
+    <!-- these files now must be included in every page -->
+    <script src='//www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit&hl={{ app.request.locale }}' async defer></script>
+    <script src="{{ asset('build/app.js') }}"></script>
+{% endblock javascripts %}
+
+{% block chatScript %}
+    {{ render(controller('ChatBundle:Default:index', { 'sender': app.user, 'target': null, 'room': null})) }}
+{% endblock chatScript %}
+
+{% if app.environment == 'prod' %}
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter51053468 = new Ya.Metrika2({
+                    id:51053468,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "//cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks2");
+</script>
+{% endif %}
+<noscript><div><img src="https://mc.yandex.ru/watch/51053468" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
+</html>
+
+

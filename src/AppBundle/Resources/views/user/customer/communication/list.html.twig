@@ -1,0 +1,91 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/profile-communication.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <section class="user-profile communication">
+
+        <div class="container">
+
+            <div class="row-offcanvas row-offcanvas-left">
+                {% include '@App/controls/user_left_menu.html.twig' %}
+                <div id="main">
+                    <div class="col-md-12">
+                        <p class="d-lg-none">
+                            <button type="button" class="btn" data-toggle="offcanvas">
+                                User Menu
+                            </button>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-7 title">
+                                <a class="communication" href="{{ path('customer_edit_communication', {'id': customer.user.id}) }}">
+                                    {{ 'artist.edit.communication.title' | trans({'%count%': '<i></i>'}) | raw }}
+                                </a>
+                            </div>
+                            <div class="col-5 filter">
+                                <span>{{ 'artist.edit.communication.filter.title' | trans }}:</span>
+                                <a class="{{ app.request.get('_route') == 'customer_edit_communication' ? 'active' : '' }}"
+                                   href="{{ path('customer_edit_communication', {'id': customer.user.id}) }}">
+                                    {{ 'artist.edit.communication.filter.value.all' | trans }}
+                                </a>,
+                                <a class="{{ app.request.get('_route') == 'customer_edit_communication_unread' ? 'active' : '' }}"
+                                   href="{{ path('customer_edit_communication_unread', {'id': customer.user.id}) }}">
+                                    {{ 'artist.edit.communication.filter.value.unread' | trans }}
+                                </a>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="row chats">
+                            <div class="col-12">
+                                {% for chat in chats %}
+                                    {% if chat.message.senderId == app.user.id %}
+                                        <a href="{{ path('customer_communication_chat', {'id': chat.message.senderId, 'id_with': chat.message.targetId}) }}"
+                                           class="item" data-position="{{ loop.index }}"
+                                           data-chat-name="{{ chat.message.chatName }}" data-message-id="{{ chat.message.id }}">
+                                            <div class="user-image" style="background-image: url('{{ chat.message.targetImage != '' ? chat.message.targetImage : asset('images/400x300.png') }}')"></div>
+                                            <div class="user-name">{{ chat.message.targetName }}</div>
+                                            <div class="message">
+                                                <i>You: </i> {{ chat.message.body }}
+                                            </div>
+                                            <div class="message-date">{{ chat.message.createdAt | date('F j, Y') }}</div>
+                                            <div class="clearfix"></div>
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('customer_communication_chat', {'id': chat.message.targetId, 'id_with': chat.message.senderId}) }}"
+                                           class="item {{ chat.status }}" data-position="{{ loop.index }}"
+                                           data-chat-name="{{ chat.message.chatName }}" data-message-id="{{ chat.message.id }}">
+                                            <div class="user-image" style="background-image: url('{{ chat.message.senderImage != '' ? chat.message.senderImage : asset('images/400x300.png') }}')"></div>
+                                            <div class="user-name">{{ chat.message.senderName }}</div>
+                                            <div class="message">
+                                                {{ chat.message.body }}
+                                            </div>
+                                            <div class="message-date">{{ chat.message.createdAt | date('F j, Y') }}</div>
+                                            <div class="clearfix"></div>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                {{ knp_pagination_render(chats) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/profile-communication.js') }}"></script>
+{% endblock javascripts %}

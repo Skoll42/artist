@@ -1,0 +1,100 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/profile-booking.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <section class="user-profile booking" style="min-height: 76.2vh;">
+
+        <div class="container">
+
+            <div class="row-offcanvas row-offcanvas-left">
+                {% include '@App/controls/user_left_menu.html.twig' %}
+                <div id="main" class="booking">
+                    <div class="col-md-12">
+                        <p class="d-lg-none">
+                            <button type="button" class="btn" data-toggle="offcanvas">
+                                User Menu
+                            </button>
+                        </p>
+
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('customer_edit_booking_all', {'id': app.user.id}) }}">{{ 'customer.edit.booking.my' | trans | raw }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('customer_edit_booking_accepted', {'id': app.user.id}) }}">{{ 'customer.edit.booking.accepted' | trans | raw }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ path('customer_edit_booking_archived', {'id': app.user.id}) }}">{{ 'customer.edit.booking.archive' | trans | raw }}</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="my-bookings" class="tab-pane active">
+                                <div class="row">
+
+                                    {% for item in bookings %}
+                                        <div class="col-12">
+                                            <div class="booking-item row">
+                                                <a class="col-xs-12 col-md-2 col-lg-3" href="{{ path('artist_profile_public', {'id': item.booking.performer.id}) }}">
+                                                    <div class="user-image" style="background-image: url('{{ item.image }}')"></div>
+                                                </a>
+                                                <div class="col-xs-12 col-md-3 col-lg-4 customer-data">
+                                                    <div class="name">
+                                                        <a href="{{ path('artist_profile_public', {'id': item.booking.performer.id}) }}">
+                                                            {{ item.name ? item.name : '' }}
+                                                        </a>
+                                                    </div>
+                                                    <div class="date">
+                                                        <span>Date: </span> {{ item.booking.eventDate | date("M d, Y") }}
+                                                    </div>
+                                                    <div class="start-time">
+                                                        <span>Start Time: </span> {{ item.booking.eventDate | date("H:i") }} h
+                                                    </div>
+                                                </div>
+                                                {% set bookingStatus = item.booking.bookingStatus %}
+                                                <div class="col-xs-12 col-md-2 col-lg-2 booking-data">
+                                                    <div class="price">{{ (item.price * platform_fee + item.price) | number_format(2, '.', '') }} kr</div>
+                                                    <div class="status {{ bookingStatus }}">{{ bookingStatus }}</div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-3 col-lg-3 booking-controls">
+
+                                                    <div class="btn archived"></div>
+
+                                                    <a class="btn send-message" id="communication"
+                                                       href="{{ path('customer_communication_chat', {'id': app.user.id, 'id_with': item.booking.performer.id}) }}">
+                                                        Send Message
+                                                    </a>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        {{ knp_pagination_render(bookings) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/profile-booking.js') }}"></script>
+{% endblock javascripts %}

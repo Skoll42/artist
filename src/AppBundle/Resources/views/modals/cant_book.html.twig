@@ -1,0 +1,20 @@
+<div class="modal fade" id="cant-book" tabindex="-1" role="dialog" aria-labelledby="signinFormLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+            </div>
+
+            <div class="modal-body">
+                <img src="{{ asset('images/icons/red/cancel.svg') }}" alt="">
+
+                <div>{{ 'customer.calendar.cant_book' | trans({'%artist_name%': artist.name}) | raw }}</div>
+
+                <button type="button" class="btn-signup close" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

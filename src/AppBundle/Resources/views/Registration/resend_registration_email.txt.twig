@@ -1,0 +1,18 @@
+{% block body_text %}
+{% autoescape false %}
+<p>Congratulations!</p>
+
+<p>Thank you for registration with Artist NextDoor. Please, click the <a href="{{  absolute_url(path('fos_user_registration_confirm', {'token': user.confirmationToken})) }}">{{  absolute_url(path('fos_user_registration_confirm', {'token': user.confirmationToken})) }}</a> to verify your email account and continue your registration process.</p>
+
+<p>
+    With best regards,<br>
+    Artist NextDoor
+</p>
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}
+
+
+
+
+

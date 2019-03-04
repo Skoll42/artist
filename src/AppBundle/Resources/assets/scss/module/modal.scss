@@ -1,0 +1,901 @@
+@import "icons";
+
+.modal {
+  .close {
+    padding: 10px;
+    margin: -1rem -0.7rem -1rem auto;
+    opacity: 1 !important;
+  }
+
+  .modal-header {
+    border: none;
+    display: block;
+  }
+}
+
+// Kill the scroll on the body
+.custom-modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/************* LOGIN MODAL ****************/
+#login-form {
+  .modal-header {
+
+    .title {
+      font-family: $font-roboto;
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: $letter-spacing-06;
+      text-align: center;
+      color: $dark-blue-grey-color;
+    }
+
+    .subtitle {
+      font-family: $font-roboto;
+      font-size: 14px;
+      letter-spacing: $letter-spacing-04;
+      text-align: center;
+      color: $dark-blue-grey-color;
+      padding: 10px 0;
+    }
+  }
+
+  .modal-body {
+    padding: 30px;
+
+    .input-parent {
+      padding: 0;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+    }
+
+    .form-group {
+      margin: 0 0 15px 0;
+
+      &.has-error {
+        .input-parent {
+          border: 1px solid #ec2552;
+        }
+        input {
+          border: none !important;
+        }
+      }
+
+      input {
+        height: 44px;
+        border: none;
+      }
+
+      .input-group-text {
+        background: none;
+        min-width: 46px;
+        border: none;
+        border-right: 2px solid #ced4da;
+
+        &.show-pwd {
+          border: none;
+        }
+      }
+    }
+
+    label {
+      &.remember {
+        font-weight: 400;
+        color: #1c2d4d;
+      }
+    }
+
+    .custom-controls-stacked {
+      margin: 10px 0 15px;
+    }
+  }
+
+  input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ced4da;
+  }
+
+  .btn-login {
+    height: 50px;
+    background-color: $white-red-color;
+    border: 1px solid $white-red-color;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+    width: 100%;
+    transition: all 0.5s;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    color: $color-white;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: inset 20px 16px 20px 20px rgba(0, 0, 0, 0.13);
+      transition: all 0.5s;
+    }
+  }
+
+  .forgot-password {
+    font-family: $font-roboto;
+    font-size: 14px;
+    letter-spacing: $letter-spacing-06;
+    text-align: center;
+    color: $white-red-color;
+    font-weight: bold;
+    margin: 15px 0;
+
+    .frg-pwd-text {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .signup-or-separator--text {
+    font-family: $font-roboto;
+    font-size: 14px;
+    letter-spacing: $letter-spacing-06;
+    color: #a1a1a1;
+    background: $color-white;
+    width: 30px;
+    height: 20px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+  }
+
+  hr {
+    margin: -13px auto 10px;
+    width: 100%;
+    border: 0;
+    border-top: 1px solid #eee;
+  }
+
+  .btn-fb {
+    width: 100%;
+    height: 50px;
+    border: none !important;
+    border-radius: 4px;
+    background-color: #385c8e;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+    letter-spacing: $letter-spacing-06;
+    text-align: center;
+    color: $color-white;
+    padding: 0 10px 0 31px;
+    position: relative;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-gp {
+    width: 100%;
+    height: 50px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+    background-color: $color-white;
+    border: solid 1px #dbdbdb;
+    letter-spacing: $letter-spacing-06;
+    text-align: center;
+    color: #666666;
+    padding: 0 20px 0 40px;
+    position: relative;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .modal-footer {
+    border-top: none;
+    font-family: $font-roboto;
+    font-size: 14px;
+    letter-spacing: $letter-spacing-06;
+    text-align: center;
+    color: $dark-blue-grey-color;
+    display: block;
+    padding: 0 20px 30px;
+
+    a {
+      color: $white-red-color;
+    }
+  }
+
+  .invalid-feedback {
+
+    .resend-verification-link {
+      float: right;
+      position: relative;
+      top: -7px;
+      text-decoration: underline;
+
+      &.disable {
+        color: #dbdbdb;
+        cursor: default;
+        text-decoration: underline;
+
+        &:hover {
+          color: #dbdbdb;
+          cursor: default;
+        }
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+
+  }
+
+}
+
+
+
+/************* SIGN UP MODAL ****************/
+#signup-form {
+  .modal-header {
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: $letter-spacing-06;
+      text-align: center;
+      color: $dark-blue-grey-color;
+    }
+
+    .subtitle {
+      letter-spacing: 0.4px;
+      text-align: center;
+      color: $dark-blue-grey-color;
+      padding: 10px 0;
+    }
+  }
+
+  .modal-body {
+    padding: 10px 30px;
+
+    .user-type {
+      padding: 0 15px;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+
+        &:checked ~ .checkmark:after {
+          display: block;
+        }
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        border: 2px solid $white-red-color;
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: none;
+          top: 2px;
+          left: 2px;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background-color: $white-red-color
+        }
+      }
+    }
+
+    .form-group {
+      input {
+        height: 44px;
+
+        &:focus {
+          outline: none !important;
+          box-shadow: none !important;
+          border: 1px solid #ced4da;
+        }
+      }
+      button {
+        &:focus {
+          outline: none !important;
+          box-shadow: none !important;
+          border: 1px solid #ced4da;
+        }
+      }
+      .input-group-text {
+        background: none;
+        min-width: 46px;
+      }
+    }
+
+    .btn-signup {
+      height: 50px;
+      background-color: $white-red-color;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      color: $color-white;
+      text-align: center;
+      cursor: pointer;
+      transition: .3s;
+
+      &:hover {
+        box-shadow: inset 20px 16px 20px 20px rgba(0, 0, 0, 0.13);
+      }
+    }
+    .signup-or-separator {
+      margin-top: 15px;
+
+      .signup-or-separator--text {
+        letter-spacing: $letter-spacing-06;
+        color: #a1a1a1;
+        background: $color-white;
+        width: 30px;
+        height: 20px;
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+      }
+
+      hr {
+        margin: -13px auto 10px;
+        width: 100%;
+        border: 0;
+        border-top: 1px solid #eee;
+      }
+    }
+
+    .btn-fb {
+      width: 100%;
+      height: 50px;
+      border: none !important;
+      border-radius: 4px;
+      background-color: #385c8e;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+      letter-spacing: $letter-spacing-06;
+      text-align: center;
+      color: $color-white;
+      padding: 0 10px 0 31px;
+      position: relative;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn-gp {
+      width: 100%;
+      height: 50px;
+      border-radius: 4px;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+      background-color: $color-white;
+      border: solid 1px #dbdbdb;
+      letter-spacing: $letter-spacing-06;
+      text-align: center;
+      color: #666666;
+      padding: 0 20px 0 40px;
+      position: relative;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  }
+
+  .modal-footer {
+    border-top: none;
+    letter-spacing: $letter-spacing-06;
+    text-align: center;
+    color: $dark-blue-grey-color;
+    display: block;
+    padding: 0 20px 30px;
+
+    a {
+      color: $white-red-color;
+    }
+  }
+
+  .show-pwd {
+
+    img {
+      visibility: hidden;
+    }
+
+    &.is-invalid {
+      border-color: $white-red-color;
+    }
+
+    &.visible-pwd {
+      img {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.captcha-box {
+
+  display: none;
+
+  &.captcha-show {
+    display: block;
+  }
+
+  .invalid-feedback {
+    display: block;
+  }
+}
+
+// Small devices
+@media (max-width: 767.98px) {
+  .captcha-box {
+    width: 284px;
+    overflow: hidden;
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+
+    .g-recaptcha {
+      position: relative;
+      left: -10px;
+    }
+  }
+}
+
+/************* FORGOT && CONFIRM && CREATE NEW PASSWORD MODAL ****************/
+#forgot-form, #confirm-forgot-form, #new-pass, #confirm-signup, #preregister, #confirmation-delete-modal {
+  .modal-header {
+
+    #preregister-link {
+      color: $white-red-color;
+
+      &:hover {
+        color: $white-red-color;
+      }
+
+      &:visited {
+        color: $white-red-color;
+      }
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: $letter-spacing-06;
+      text-align: center;
+      color: $dark-blue-grey-color;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: $dark-blue-grey-color;
+      padding: 10px 0;
+    }
+  }
+
+  .modal-body {
+    padding: 30px;
+
+    .form-group {
+      input {
+        height: 44px;
+
+        &:focus {
+          outline: none !important;
+          box-shadow: none !important;
+          border: 1px solid #ced4da;
+        }
+      }
+      button {
+        &:focus {
+          outline: none !important;
+          box-shadow: none !important;
+          border: 1px solid #ced4da;
+        }
+      }
+      .input-group-text {
+        background: none;
+        min-width: 46px;
+      }
+    }
+  }
+
+  .descript-box{
+    line-height: 21px;
+    letter-spacing: .6px;
+    font-size: 14px;
+  }
+
+  .btn-reset, .btn-confirmation-delete {
+    height: 50px;
+    background-color: $white-red-color;
+    border: 1px solid $white-red-color;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+    width: 100%;
+    transition: all 0.5s;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    color: $color-white;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: inset 20px 16px 20px 20px rgba(0, 0, 0, 0.13);
+      transition: all 0.5s;
+    }
+  }
+
+  .back-link {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    text-align: center;
+    color: #ec2552;
+    margin: 15px 0;
+    text-decoration: underline;
+
+    .was-send {
+      display: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.disable {
+      .will-send {
+        display: none;
+      }
+
+      .was-send {
+        display: inline;
+      }
+    }
+  }
+
+  .modal-footer {
+    border-top: none;
+    letter-spacing: $letter-spacing-06;
+    text-align: center;
+    color: $dark-blue-grey-color;
+    display: block;
+    padding: 0 20px 30px;
+
+    .btn-reset, .btn-confirmation-delete {
+      height: 50px;
+      background-color: $white-red-color;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      color: $color-white;
+      text-align: center;
+    }
+
+    button {
+      border: none !important;
+      cursor: pointer;
+    }
+  }
+
+  // specify the disable link resend email
+  #resend-email, #registr-resend-email {
+    &.disable {
+      color: #dbdbdb;
+      cursor: default;
+      text-decoration: underline;
+
+      &:hover {
+        color: #dbdbdb;
+        cursor: default;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .show-pwd {
+
+    img {
+      visibility: hidden;
+    }
+
+    &.is-invalid {
+      border-color: $white-red-color;
+    }
+
+    &.visible-pwd {
+      img {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+#book-now-form {
+  @media (min-width: 992px) {
+    .modal-lg {
+      max-width: 900px;
+    }
+  }
+  .modal-header {
+    height: 1px;
+    padding: 10px 8px;
+  }
+
+  .modal-body {
+    padding: 10px 30px 30px;
+
+    .artist-image {
+      background-position: center;
+      background-size: cover;
+      width: 100%;
+      height: 263px;
+    }
+
+    .artist-name {
+      margin-top: 25px;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+      text-align: center;
+      color: #1d2c4d;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .artist-performance {
+      width: 100%;
+      height: 42px;
+      line-height: 1.36;
+      text-align: center;
+      color: #666666;
+      margin: 15px 0;
+      font-weight: 300;
+
+      .value {
+        color: $white-red-color;
+        font-weight: bold;
+      }
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      color: #1d2c4d;
+
+      a {
+        color: #1d2c4d;
+        text-decoration: underline;
+      }
+
+      &.form-check-label {
+        font-weight: 400;
+        font-size: 16px;
+        margin: 0 0 0 10px;
+
+        &.error {
+          margin: 0 0 0 10px;
+          font-weight: bold;
+        }
+      }
+
+      &.error {
+        margin: 15px 0 0;
+        color: #ec2552;
+
+        a {
+          color: #ec2552;
+        }
+      }
+    }
+
+    .address {
+
+      .artist-book-address {
+        width: 100%;
+        line-height: 27px;
+        border-radius: 3px;
+        border: 1px #dbdbdb solid;
+        padding: 6px 10px;
+      }
+    }
+
+    .artist-date {
+      .date {
+        .artist-book-date {
+          width: 100%;
+          line-height: 27px;
+          border-radius: 3px;
+          border: 1px #dbdbdb solid;
+          padding: 6px 10px;
+        }
+        #artist-book-date-error {
+          margin-top: 10px;
+        }
+      }
+      .artist-time-wrapper {
+        width: 100%;
+        .time_pick {
+          .timepicker_wrap {
+            top: 50px !important;
+          }
+          .artist-book-time {
+            width: 100%;
+            height: 42px;
+            line-height: 40px;
+            border-radius: 3px;
+            border: 1px #dbdbdb solid;
+            padding: 0 10px;
+
+            #artist-time-error {
+              position: absolute;
+              width: 100%;
+              top: 40px;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .comment {
+      margin-top: 15px;
+      margin-bottom: 10px;
+
+      .artist-book-comment {
+        resize: none;
+        width: 100%;
+        height: 120px;
+        border-radius: 3px;
+        border: 1px solid #dbdbdb;
+        padding: 10px;
+      }
+    }
+
+    #card-element {
+      width: 100%;
+    }
+
+    .user-card {
+
+      #card-element {
+        margin: 0;
+        padding: 15px;
+        border: 1px solid #dbdbdb;
+        border-radius: 3px;
+      }
+
+      #card-errors {
+        color: #ec2552;
+        margin-top: 10px;
+      }
+
+    }
+  }
+
+  hr {
+    width: 100%;
+    margin: 20px auto;
+    border-top: 1px solid #dbdbdb;
+  }
+
+  button {
+    height: 45px;
+    background-color: #ec2552;
+    border: 1px solid #ec2552;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+    width: 130px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    transition: .3s;
+
+    &:hover {
+      background-color: #ffffff;
+      color: #ec2552;
+    }
+  }
+
+  .errors {
+    display: none;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .hide-picker {
+    background-color: #ec2552;
+    color: #ffffff;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+}
+
+.datepicker table tr td.new.day {
+  color: #212529 !important;
+}
+.datepicker table tr td.disabled.day {
+  color: #777777 !important;
+}
+
+#confirmation-booking,
+#reject-booking,
+#cancel-booking,
+#comment-booking,
+#location-booking,
+#coming-soon,
+#feedback-sent,
+#cant-book,
+#user-delete {
+  .modal-body {
+    padding: 10px 30px 30px;
+    text-align: center;
+
+    img {
+      max-width: 55px;
+      margin: -20px auto 27px;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 0.6px;
+      text-align: center;
+      color: #1d2c4d;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: $dark-blue-grey-color;
+      padding: 10px 0;
+    }
+
+    button {
+      cursor: pointer;
+      height: 50px;
+      background-color: #ec2552;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      color: #ffffff;
+      text-align: center;
+      transition: .3s;
+      margin-top: 27px;
+    }
+  }
+}
+#comment-booking, #location-booking {
+  .title {
+    font-size: 26px !important;
+    margin-bottom: 15px;
+  }
+}

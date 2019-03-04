@@ -1,0 +1,53 @@
+<!-- MODAL FORGOT PASSWORD -->
+
+<div class="modal fade" id="forgot-form" tabindex="-1" role="dialog" aria-labelledby="forgotFormLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+                <div class="title pt-3">Forgot password?</div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="subtitle pb-0 pt-3 font-weight-normal">
+                            Enter the email address associated with your account,
+                            and we’ll email you a link to reset your password.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-body pt-3">
+                <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" id="forgot-pass">
+                    <div class="form-group row">
+                        <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <img src="{{ asset('images/mail-icon.svg') }}" alt="">
+                                </span>
+                            </div>
+                            <input class="form-control" id="username" name="username" required="required" type="email"
+                                   placeholder="Email Address"/>
+                        </div>
+                        <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4">
+                            <button type="submit" class="btn-reset">Send Reset Link</button>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="row justify-content-center pt-3 pb-2">
+
+                    <div class="col-12 text-center">
+                        <a href="#" class="back-link" id="back-to-login">
+                            <i class="icon-left"></i>
+                            Back to Login
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,771 @@
+//CALENDAR
+//colors
+$mercury: #e5e5e5;
+$color_gallery_approx: #eee;
+$color_red_orange_approx: #ff3b30;
+$white: #fff;
+$color_charlotte_approx: #bce8f1;
+$color_mine_shaft_approx: #333;
+$color_pippin_approx: #ffe3e3;
+$color_mountain_mist_approx: #919191;
+$color_pink_lace_approx: #f3dcf8;
+$color_french_pass_approx: #c6ebfe;
+$color_your_pink_approx: #ffbebe;
+$color_madang_approx: #beffbf;
+$color_celeste_approx: #cdcdcd;
+$color_black_haze_approx: #f7f7f7;
+$color_pink_swan_approx: #b8b8b8;
+$white_0: rgba(255, 255, 255, .0);
+$font-roboto: 'Roboto';
+
+
+//@extend-elements
+//original selectors
+//.fc-button-month.fc-state-default, .fc-button-agendaWeek.fc-state-default, .fc-button-agendaDay.fc-state-default
+%extend_1 {
+  min-width: 67px;
+  text-align: center;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: all 0.2s;
+}
+
+//original selectors
+//.fc-state-down, .fc-state-active
+%extend_2 {
+  background-color: $color_red_orange_approx;
+  background-image: none;
+  outline: 0;
+  color: $white;
+}
+
+
+.fc {
+  direction: ltr;
+  text-align: left;
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1em;
+    font-family: Helvetica Neue, Helvetica;
+  }
+  td {
+    padding: 0;
+    vertical-align: top;
+  }
+  th {
+    padding: 0;
+    vertical-align: top;
+    height: 55px;
+  }
+  .fc-header-space {
+    padding-left: 10px;
+  }
+  .ui-resizable-handle {
+    display: block;
+    position: absolute;
+    z-index: 99999;
+    overflow: hidden;
+    font-size: 300%;
+    line-height: 50%;
+  }
+  .fc-week-number {
+    width: 22px;
+    text-align: center;
+    div {
+      padding: 0 2px;
+    }
+  }
+  .ui-draggable-dragging .fc-event-bg {
+    display: none\9;
+  }
+}
+.fc-header {
+  td {
+    white-space: nowrap;
+    padding: 15px 10px 0;
+  }
+  .fc-button {
+    margin-bottom: 1em;
+    vertical-align: top;
+    margin-right: -1px;
+  }
+  .fc-corner-right {
+    margin-right: 0;
+  }
+  .ui-corner-right {
+    margin-right: 0;
+  }
+  .fc-state-hover {
+    z-index: 2;
+  }
+  .ui-state-hover {
+    z-index: 2;
+  }
+  .fc-state-down {
+    z-index: 3;
+  }
+  .fc-state-active {
+    z-index: 4;
+  }
+  .ui-state-active {
+    z-index: 4;
+  }
+}
+.fc-header-left {
+  width: 25%;
+  text-align: left;
+}
+.fc-header-center {
+  text-align: center;
+}
+.fc-header-right {
+  width: 25%;
+  text-align: right;
+}
+.fc-header-title {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 4px;
+  width: 140px;
+
+  h2 {
+    margin-top: 0;
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: $font-roboto;
+    text-align: center;
+    color: #1d2c4d;
+  }
+}
+.fc-content {
+  clear: both;
+  zoom: 1;
+}
+.fc-view {
+  width: 100%;
+  overflow: hidden;
+}
+.fc-widget-content {
+  border: 1px solid $mercury;
+}
+.fc-widget-header {
+  border-bottom: 1px solid $color_gallery_approx;
+  .fc-agenda-divider-inner {
+    background: $color_gallery_approx;
+  }
+}
+.fc-cell-overlay {
+  background: $color_charlotte_approx;
+  opacity: .3;
+  filter: alpha(opacity=30);
+}
+.fc-button {
+  position: relative;
+  display: inline-block;
+  padding: 0 .6em;
+  overflow: hidden;
+  height: 1.9em;
+  line-height: 1.9em;
+  white-space: nowrap;
+  cursor: pointer;
+  .fc-icon-wrap {
+    position: relative;
+    float: left;
+    top: 50%;
+  }
+  .ui-icon {
+    position: relative;
+    float: left;
+    margin-top: -50%;
+    *margin-top: 0;
+    *top: -50%;
+  }
+}
+.fc-state-default {
+  border: 1px solid;
+  border-color: $color_red_orange_approx;
+  color: $color_red_orange_approx;
+  &.fc-corner-left {
+    //Instead of the line below you could use @include border-top-left-radius($radius)
+    border-top-left-radius: 4px;
+    //Instead of the line below you could use @include border-bottom-left-radius($radius)
+    border-bottom-left-radius: 4px;
+  }
+  &.fc-corner-right {
+    //Instead of the line below you could use @include border-top-right-radius($radius)
+    border-top-right-radius: 4px;
+    //Instead of the line below you could use @include border-bottom-right-radius($radius)
+    border-bottom-right-radius: 4px;
+  }
+}
+.fc-text-arrow {
+  margin: 0 .4em;
+  font-size: 2em;
+  line-height: 23px;
+  vertical-align: baseline;
+}
+.fc-state-hover {
+  color: $color_mine_shaft_approx;
+  background-color: $color_pippin_approx;
+  color: $color_red_orange_approx;
+  text-decoration: none;
+  background-position: 0 -15px;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: background-position 0.1s linear;
+}
+.fc-state-down {
+  color: $color_mine_shaft_approx;
+  background-color: $color_pippin_approx;
+  @extend %extend_2;
+}
+.fc-state-active {
+  color: $color_mine_shaft_approx;
+  background-color: $color_pippin_approx;
+  @extend %extend_2;
+}
+.fc-state-disabled {
+  color: $color_mine_shaft_approx;
+  background-color: $color_pippin_approx;
+  cursor: default;
+  background-image: none;
+  background-color: $color_pippin_approx;
+  filter: alpha(opacity=65);
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: none;
+  border: 1px solid $color_pippin_approx;
+  color: $color_red_orange_approx;
+}
+.fc-event-container {
+  > * {
+    z-index: 8;
+  }
+  > {
+    .ui-draggable-dragging {
+      z-index: 9;
+    }
+    .ui-resizable-resizing {
+      z-index: 9;
+    }
+  }
+}
+.fc-event {
+  border: 1px solid $white;
+  background-color: $white;
+  color: $color_mountain_mist_approx;
+  font-size: 12px;
+  cursor: default;
+  &.chill {
+    background-color: $color_pink_lace_approx;
+  }
+  &.info {
+    background-color: $color_french_pass_approx;
+  }
+  &.important {
+    background-color: #8f96a6;
+    .fc-event-inner {
+      .fc-event-time {
+        color: #FFFFFF;
+      }
+    }
+  }
+  &.success {
+    background-color: $color_madang_approx;
+  }
+  &:hover {
+    opacity: 0.7;
+  }
+}
+.fc-event-draggable {
+  cursor: pointer;
+}
+.fc-rtl {
+  .fc-event {
+    text-align: right;
+  }
+  .fc-event-hori {
+    &.fc-event-end {
+      border-left-width: 1px;
+    }
+    &.fc-event-start {
+      border-right-width: 1px;
+    }
+  }
+  .fc-grid {
+    .fc-day-number {
+      float: left;
+    }
+    .fc-event-time {
+      float: right;
+    }
+  }
+}
+.fc-event-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  line-height: 15px;
+  font-size: 11px;
+}
+.fc-event-time {
+  padding: 0 1px;
+}
+.fc-event-title {
+  padding: 0 1px;
+}
+.fc-event-hori {
+  border-width: 1px 0;
+  margin-bottom: 1px;
+  .ui-resizable-e {
+    top: 0 !important;
+    right: -3px !important;
+    width: 7px !important;
+    height: 100% !important;
+    cursor: e-resize;
+  }
+  .ui-resizable-w {
+    top: 0 !important;
+    left: -3px !important;
+    width: 7px !important;
+    height: 100% !important;
+    cursor: w-resize;
+  }
+  .ui-resizable-handle {
+    _padding-bottom: 14px;
+  }
+}
+table {
+  &.fc-border-separate {
+    border-collapse: separate;
+  }
+  &.fc-header {
+    background-color: $white;
+  }
+}
+.fc-border-separate {
+  th {
+    border-width: 1px 0 0 1px;
+    background-color: #1d2c4d;
+    &.fc-last {
+      border-right-width: 1px;
+    }
+  }
+  td {
+    border-width: 1px 0 0 1px;
+    &.fc-last {
+      border-right-width: 1px;
+    }
+  }
+  .fc-week {
+    .fc-first {
+      border-left: 0;
+    }
+    .fc-last {
+      border-right: 0;
+    }
+  }
+  tr.fc-last {
+    td {
+    }
+    th {
+      border-bottom-width: 1px;
+      border-color: $color_celeste_approx;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 30px;
+    }
+  }
+  tbody tr.fc-first {
+    td {
+      border-top-width: 0;
+    }
+    th {
+      border-top-width: 0;
+    }
+  }
+}
+.fc-grid {
+  th {
+    text-align: center;
+  }
+  .fc-day-number {
+    float: right;
+    padding: 0 2px;
+  }
+  .fc-day-content {
+    clear: both;
+    padding: 2px 2px 1px;
+  }
+  .fc-event-time {
+    font-weight: bold;
+  }
+  .fc-other-month .fc-day-number {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+}
+.fc-agenda {
+  table {
+    border-collapse: separate;
+  }
+  .fc-agenda-axis {
+    width: 50px;
+    padding: 0 4px;
+    vertical-align: middle;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: normal;
+  }
+  .fc-week-number {
+    font-weight: bold;
+  }
+  .fc-day-content {
+    padding: 2px 2px 1px;
+  }
+  .ui-resizable-resizing {
+    _overflow: hidden;
+  }
+}
+.fc-agenda-days {
+  th {
+    text-align: center;
+  }
+  .fc-agenda-axis {
+    border-right-width: 1px;
+  }
+  .fc-col0 {
+    border-left-width: 0;
+  }
+}
+.fc-agenda-allday {
+  th {
+    border-width: 0 1px;
+  }
+  .fc-day-content {
+    min-height: 34px;
+    _height: 34px;
+  }
+}
+.fc-agenda-divider-inner {
+  height: 2px;
+  overflow: hidden;
+}
+.fc-agenda-slots {
+  th {
+    border-width: 1px 1px 0;
+  }
+  td {
+    border-width: 1px 0 0;
+    background: none;
+    div {
+      height: 20px;
+    }
+  }
+  tr {
+    &.fc-slot0 {
+      th {
+        border-top-width: 0;
+      }
+      td {
+        border-top-width: 0;
+      }
+    }
+    &.fc-minor th.ui-widget-header {
+      *border-top-style: solid;
+    }
+  }
+}
+.fc-event-vert {
+  border-width: 0 1px;
+  &.fc-event-start {
+    border-top-width: 1px;
+    //Instead of the line below you could use @include border-top-left-radius($radius)
+    border-top-left-radius: 3px;
+    //Instead of the line below you could use @include border-top-right-radius($radius)
+    border-top-right-radius: 3px;
+  }
+  &.fc-event-end {
+    border-bottom-width: 1px;
+    //Instead of the line below you could use @include border-bottom-left-radius($radius)
+    border-bottom-left-radius: 3px;
+    //Instead of the line below you could use @include border-bottom-right-radius($radius)
+    border-bottom-right-radius: 3px;
+  }
+  .fc-event-time {
+    white-space: nowrap;
+    font-size: 10px;
+  }
+  .fc-event-inner {
+    position: relative;
+    z-index: 2;
+  }
+  .fc-event-bg {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $white;
+    opacity: .25;
+    filter: alpha(opacity=25);
+  }
+  .ui-resizable-s {
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 8px !important;
+    overflow: hidden !important;
+    line-height: 8px !important;
+    font-size: 11px !important;
+    font-family: monospace;
+    text-align: center;
+    cursor: s-resize;
+  }
+}
+
+.fc-button-today {
+  border: 1px solid $white_0;
+}
+html .fc {
+  font-size: 1em;
+  font-family: Helvetica Neue, Helvetica;
+}
+.fc-state-highlight > div > div.fc-day-number {
+  background-color: $color_red_orange_approx;
+  color: $white;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 50%;
+  margin: 4px;
+}
+.fc-button-prev .fc-text-arrow {
+  font-weight: bold;
+}
+.fc-button-next .fc-text-arrow {
+  font-weight: bold;
+}
+.fc-button-month.fc-state-default {
+  @extend %extend_1;
+}
+.fc-button-agendaWeek.fc-state-default {
+  @extend %extend_1;
+}
+.fc-button-agendaDay.fc-state-default {
+  @extend %extend_1;
+}
+a.fc-event {
+  text-decoration: none;
+  cursor: pointer;
+}
+.fc-ltr .fc-event-hori {
+  &.fc-event-start {
+    border-left-width: 1px;
+  }
+  &.fc-event-end {
+    border-right-width: 1px;
+  }
+}
+.fc-select-helper .fc-event-bg {
+  display: none\9;
+}
+thead tr.fc-first {
+  background-color: $color_black_haze_approx;
+}
+.fc-week .fc-day {
+  > div .fc-day-number {
+    font-size: 15px;
+    margin: 2px;
+    min-width: 30px;
+    padding: 6px;
+    text-align: center;
+  }
+  &:hover .fc-day-number {
+    background-color: $color_pink_swan_approx;
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 50%;
+    color: #1d2c4d;
+    //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+    transition: background-color 0.2s;
+  }
+  &.fc-state-highlight:hover .fc-day-number {
+    background-color: $color_red_orange_approx;
+  }
+}
+.fc-view-agendaDay thead tr.fc-first .fc-widget-header {
+  text-align: right;
+  padding-right: 10px;
+}
+
+//colors
+$color_alto_approx: #ddd;
+$color_mariner_approx: #36c;
+$white: #fff;
+$color_storm_dust_approx: #666;
+$color_pale_slate_approx: #c3c3c3;
+
+#external-events {
+  float: left;
+  width: 150px;
+  padding: 0 10px;
+  text-align: left;
+  h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+  }
+  p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: $color_storm_dust_approx;
+    input {
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+}
+
+.external-event {
+  margin: 10px 0;
+  padding: 2px 4px;
+  background: $color_mariner_approx;
+  color: $white;
+  font-size: .85em;
+  cursor: pointer;
+}
+
+#artist-calendar-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  background-color: $white;
+
+  .fc-content {
+    table {
+      border-collapse: initial;
+      border-spacing: 0;
+
+      tbody {
+        .fc-week {
+          td:first-child {
+            border-left: 1px solid #e5e5e5;
+          }
+          td:last-child {
+            border-right: 1px solid #e5e5e5;
+          }
+        }
+        .fc-last {
+          td:first-child {
+            border-radius: 0 0 0 10px;
+            -webkit-border-radius: 0 0 0 10px;
+            -moz-border-radius: 0 0 0 10px;
+            -khtml-border-radius: 0 0 0 10px;
+            border-left: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+          }
+          td {
+            border-bottom: 1px solid #e5e5e5;
+          }
+          td:last-child {
+            border-radius: 0 0 10px 0;
+            -webkit-border-radius: 0 0 10px 0;
+            -moz-border-radius: 0 0 10px 0;
+            -khtml-border-radius: 0 0 10px 0;
+            border-right: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+          }
+        }
+      }
+    }
+  }
+
+  .fc-header-right {
+    .fc-state-default {
+      border: 0;
+    }
+  }
+
+  .fc-border-separate {
+    thead {
+      th:first-child {
+        border-radius: 10px 0 0 0;
+        -webkit-border-radius: 10px 0 0 0;
+        -moz-border-radius: 10px 0 0 0;
+        -khtml-border-radius: 10px 0 0 0;
+      }
+      th:last-child {
+        border-radius: 0 10px 0 0;
+        -webkit-border-radius: 0 10px 0 0;
+        -moz-border-radius: 0 10px 0 0;
+        -khtml-border-radius: 0 10px 0 0;
+      }
+    }
+  }
+
+  .fc-button-today {
+    border: 0;
+    color: #1d2c4d;
+    font-family: $font-roboto;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: underline;
+    background-color: #FFF;
+    margin-top: 3px;
+  }
+
+  .hide-on-mobile {
+    @media (min-width: 320px) {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      display: inline-block;
+    }
+  }
+
+  .fc-header td:first-child {
+    padding: 15px 10px 0;
+  }
+  .fc-header td:last-child {
+    padding: 15px 0 0 0;
+  }
+
+  .fc-header-left {
+    font-family: $font-roboto;
+    font-size: 18px;
+    font-weight: 500;
+    color: #1d2c4d;
+    margin-top: 5px;
+  }
+
+  .fc-day-number {
+    font-weight: bold;
+  }
+
+  .fc-content {
+    @media (min-width: 320px) {
+      padding: 0 10px;
+    }
+  }
+
+  .fc-state-highlight > div > div.fc-day-number {
+    background-color: #ec2552;
+  }
+
+  .fc-button-prev, .fc-button-next {
+    color: #ec2552;
+  }
+
+  .fc-day-header {
+    font-family: $font-roboto;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #ffffff;
+    vertical-align: middle;
+  }
+
+  [data-busy="true"] {
+    background-color: #cccccc;
+  }
+}

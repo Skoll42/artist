@@ -1,0 +1,145 @@
+<div class="modal fade" id="book-now-form" tabindex="-1" role="dialog" aria-labelledby="signinFormLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+            </div>
+
+            <div class="modal-body">
+                <form action="{{ path('book_artist', {'id': artist.user.id}) }}" class="book-form" id="book-form" method="post">
+
+                    <input type="hidden" name="price" value="{{ (artist.price * platform_fee + artist.price) | number_format(2, '.', '') }}" />
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                            <div class="artist-image" style="background-image: url('{{ artist.image }}')"></div>
+
+                            <div class="artist-name">{{ artist.name }}</div>
+
+                            <div class="artist-performance">
+                                <div class="label">Performance duration and price:</div>
+                                <div class="value">
+                                    {% set hour = artist.time | date('H') != '00' ? artist.time | date('H') ~ ' hour ' : '' %}
+                                    {% set minutes = artist.time | date('i') ~ ' min' %}
+                                    {{ hour ~ minutes }} / {{ (artist.price * platform_fee + artist.price) | number_format(0, '.', '') }} kr
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                            <div class="form-group address">
+                                <label for="artistBookAddress">Event location (address)</label>
+                                <input type="text" name="artist-book-address" required="required" autocomplete="off" id="artistBookAddress" class="artist-book-address form-control" placeholder="Type event address">
+                            </div>
+
+                            <div class="row artist-date">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group date">
+                                        <label for="artistBookDate">Date</label>
+                                        <input type="text" name="artist-book-date" required="required" autocomplete="off" id="artistBookDate" class="artist-book-date form-control">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group artist-time-wrapper">
+                                        <label for="artistBookTime">Start Time</label>
+                                        <input type="text" name="appbundle_artist[time]" required="required" autocomplete="off" id="artist-time" placeholder="Choose time" class="artist-book-time form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group comment">
+                                <label for="artistBookComment">Comment</label>
+                                <textarea name="artist-book-comment" id="artistBookComment" cols="30" rows="10" class="artist-book-comment" autocomplete="off" placeholder="Add some comments (optional)"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="artistBookCard">Payment card information</label>
+                                <form method="post" id="payment-form1">
+                                    <div class="form-row user-card">
+                                        <div class="col-2">
+                                            <a target="_blank" style="display: block; width: 100%; height: 48px; background: url('{{ asset('images/payment-logo.png') }}') no-repeat center; background-size: 100%;" href="https://stripe.com/"></a>
+                                        </div>
+                                        <div class="col-10">
+                                            <div id="card-element">
+                                                <!-- A Stripe Element will be inserted here. -->
+                                            </div>
+                                        </div>
+
+                                        <!-- Used to display form errors. -->
+                                        <div id="card-errors" role="alert"></div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="d-none d-lg-block d-xl-block col-lg-4">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="terms">
+                                <label for="terms" class="form-check-label">
+                                    I accept
+                                    <a href="{{ path('privacy_policy') }}" title="Privacy Policy" target="_blank">
+                                        Privacy Policy</a> and <a href="{{ path('terms_and_conditions') }}" title="Terms and Conditions" target="_blank">
+                                        Terms and Conditions
+                                    </a>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <hr>
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="success-message" style="display: none; text-align: right">
+                                        Booking request is sent to {{ artist.name }}, please wait for  {{ artist.name }} to accept the Booking.
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <button type="button" class="btn-signup book-artist">{{ 'artist.public.book_now' | trans }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.artist-book-date').datepicker({
+            format: 'yyyy/mm/dd',
+            startDate: new Date(),
+            endDate: '+90d',
+            autoclose: true,
+            datesDisabled: busyDatesArr,
+            disableTouchKeyboard: true,
+            todayBtn: true,
+            todayHighlight: true
+
+        });
+
+        $('#artist-time').timepicki({
+            show_meridian: false,
+            step_size_hours: 1,
+            step_size_minutes: 5,
+            start_time: ["13", "00"],
+            min_hour_value: 0,
+            max_hour_value: 23,
+            disable_keyboard_mobile: true,
+        });
+
+        $('#book-now-form').on('hidden.bs.modal', function () {
+            $(this).remove();
+        });
+    </script>
+</div>

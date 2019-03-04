@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="12px" viewBox="0 0 14 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>history</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="User-Profile-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="User-Edit-Profile-Page" transform="translate(-150.000000, -234.000000)" fill="#EE4269">
+            <g id="history" transform="translate(150.000000, 234.000000)">
+                <g id="Shape">
+                    <polygon fill-rule="nonzero" points="7.25301205 3.38028169 7.25301205 6.7426168 10.1407199 8.45070423 10.626506 7.63365169 8.26506657 6.23826339 8.26506657 3.38028169"></polygon>
+                    <path d="M7.99665625,0 C4.68,0 2,2.68665625 2,6 L0,6 L2.59665625,8.59665625 L2.6433125,8.6933125 L5.33334375,6 L3.33334375,6 C3.33334375,3.42334375 5.42334375,1.33334375 8,1.33334375 C10.5766563,1.33334375 12.6666563,3.42334375 12.6666563,6 C12.6666563,8.57665625 10.5766563,10.6666563 8,10.6666563 C6.71,10.6666563 5.54665625,10.14 4.70334375,9.29665625 L3.76,10.24 C4.84334375,11.3266562 6.34,12 7.99665625,12 C11.3133438,12 14,9.31334375 14,6 C14,2.68665625 11.3133438,0 7.99665625,0 Z" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

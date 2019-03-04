@@ -1,0 +1,148 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/contact-us-page.css') }}">
+{% endblock stylesheets %}
+{% block content %}
+    <div class="contact-us-wrapper margin-top-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-7">
+                    <div class="row">
+                        <div class="col-12 title">
+                            <span>How Can We Help You?</span>
+                        </div>
+                        <div class="col-12 form-wrapper margin-top-40">
+                            {{ form_start(form, {'method': 'post', 'action': path('contact-us'), 'attr': {'id':'contact-us-form'}}) }}
+                            <div class="form-group">
+                                <div class="label">Full Name</div>
+                                <div class="input-parent col-xs-12 input-group">
+                                    {{ form_widget(form.name, {'attr': {'class': 'name'}, 'id': 'contact-us-name' }) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group margin-top-20">
+                                <div class="label">Email</div>
+                                <div class="input-parent col-xs-12 input-group">
+                                    {{ form_widget(form.email, {'attr': {'class': 'email'}, 'id': 'contact-us-email' }) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group margin-top-20">
+                                <div class="profile-label">Message</div>
+                                <div class="input-parent input-group">
+                                    {{ form_widget(form.feedback, {'attr': {'class': 'feedback'}, 'id': 'contact-us-feedback' }) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group margin-top-20">
+                                <div id="contact-us-captcha-box" class="contact-us-captcha-box {%  if contact_us_show_captcha_flag %} contact-us-captcha-show {% endif %}">
+                                    <div class="g-recaptcha" data-callback="contactUsRecaptchaCallback" data-sitekey="{{ recaptcha_site_key }}" id="contactuscaptcha"></div>
+                                    <div id="contact-us-recaptcha-error"></div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="clientTime">
+                            {{ form_end(form) }}
+                            <div class="bottom-contact-us float-right margin-top-20">
+                                <a href="#" class="contact-us-send-feedback">Send</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 offset-lg-1">
+                    <div class="contacts">
+                        <div class="row">
+                            <div class="col-12 title">
+                                <span>Contact Us</span>
+                            </div>
+                            <div class="col-12 info">
+                                <div class="row margin-top-40">
+                                    <div class="col-2 contact-us-image">
+                                        <img src="{{ asset('images/placeholder-1.svg') }}">
+                                    </div>
+                                    <div class="col-10 text">
+                                        <div class="black">Postal Address</div>
+                                        <div class="red">{{ address }}</div>
+                                    </div>
+                                </div>
+                                <div class="row margin-top-40">
+                                    <div class="col-2 contact-us-image">
+                                        <img src="{{ asset('images/mail-2.svg') }}">
+                                    </div>
+                                    <div class="col-10 text">
+                                        <div class="black">Email</div>
+                                        <div class="red">
+                                            <a href="mailto:artist@your-nextdoor.no">artist@your-nextdoor.no</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row margin-top-40">
+                                    <div class="col-2 contact-us-image">
+                                        <img src="{{ asset('images/info.svg') }}">
+                                    </div>
+                                    <div class="col-10 text">
+                                        <div class="black">Company Information</div>
+                                        <div class="red">ARTISTNEXTDOOR AS 921214995</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 socials margin-top-40">
+                                <a href="https://www.instagram.com/artistnextdoornorge/" title="ArtistNextDoor instagram" target="_blank">
+                                    <img src="{{ asset('images/icons/red/instagram-big.svg') }}" />
+                                </a>
+                                <a href="https://www.facebook.com/artistnextdoornorge/" title="ArtistNextDoor facebook" target="_blank">
+                                    <img src="{{ asset('images/icons/red/facebook-big.svg') }}" />
+                                </a>
+                                <a href="#" title="ArtistNextDoor twitter" target="_blank">
+                                    <img src="{{ asset('images/icons/red/twitter-big.svg') }}" />
+                                </a>
+                            </div>
+                            <div class="bottom-image margin-top-40">
+                                <img src="{{ asset('images/guitarist.jpg') }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-7">
+                    <div class="about-us margin-top-40">
+                        <div class="row">
+                            <div class="col-12 title">
+                                <span>About Us</span>
+                            </div>
+                            <div class="col-12 text margin-top-20">
+                                <p>Artist NextDoor connects independent artists with common users via a newly developed digital platform. Our aim is to make the booking process easier, safe and more cost effective.</p>
+                                <p>Artist NextDoor was founded in 2017 by cultural entrepreneurs who worked for a decade with events- and music productions. For a while ago, we discovered that traditional booking agencies rarely cooperate with indie performers. And one way to fix it, is to help artists to be discovered online. Artist NextDoor is a digital provider that makes artist  promotion affordable. Exposure of the profile on this digital platform will not involve regular advertising costs. The service is open and available to the global internet community.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/contact-us-page.js') }}"></script>
+    <script>
+        function contactUsRecaptchaCallback() {
+            return new Promise(function(resolve, reject) {
+                if (grecaptcha && grecaptcha.getResponse().length > 0) {
+                    document.getElementById('contact-us-recaptcha-error').innerHTML = '';
+                }
+                resolve();
+            });
+        }
+        $(document).ready(function() {
+            new ContactUs({
+                sendFeedbackBtn: ".contact-us-send-feedback",
+                form: "#contact-us-form",
+            });
+        });
+    </script>
+{% endblock javascripts %}

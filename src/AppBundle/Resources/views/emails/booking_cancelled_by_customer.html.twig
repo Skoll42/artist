@@ -1,0 +1,11 @@
+<p>Dear {{ artistName }},</p>
+
+<p>
+    The booking {{ date }} has been cancelled by {{ customerName }}. The standard cancellation policy applies within 7 days prior to event
+    <a target="_blank" href="{{ absolute_url(path('terms_and_conditions')) }}#billing_anchor">{{ absolute_url(path('terms_and_conditions')) }}#billing_anchor</a>. For re-booking contact {{ customerName }} directly.
+</p>
+
+<p>
+    With best regards,<br />
+    Artist NextDoor
+</p>

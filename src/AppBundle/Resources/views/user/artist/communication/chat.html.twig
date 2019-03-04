@@ -1,0 +1,79 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/profile-communication.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    {% set chatRoomId = 'room-' ~ artist.user.id ~ '-' ~ customer.user.id %}
+    <section class="user-profile communication">
+
+        <div class="container">
+
+            <div class="row-offcanvas row-offcanvas-left">
+                {% include '@App/controls/user_left_menu.html.twig' %}
+                <div id="main">
+                    <div class="col-md-12">
+                        <p class="d-lg-none">
+                            <button type="button" class="btn" data-toggle="offcanvas">
+                                User Menu
+                            </button>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-7 title">
+                                <a class="communication" href="{{ path('artist_edit_communication', {'id': artist.user.id}) }}">
+                                    {{ 'artist.edit.communication.title' | trans({'%count%': '<i></i>'}) | raw }}
+                                </a> >
+
+                                {% set customerName = customer.name is defined and customer.name is not empty ? customer.name : customer.firstName ~ ' ' ~ customer.lastName %}
+                                <a href="{{ path('customer_profile_public', {'id': customer.user.id}) }}" class="chat-with">{{ customerName }}</a>
+                            </div>
+                            <hr />
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-12 chat-area">
+                                <div class="chat-wrapper">
+                                    <div class="chat" data-room-id="{{ chatRoomId }}" data-scrolled="true">
+                                    </div>
+                                </div>
+
+                                <div class="typing-wrapper"></div>
+
+                                <div class="textarea">
+                                    <textarea name="message" id="message" placeholder="Write your message…"></textarea>
+                                </div>
+
+                                <div class="bottom-profile">
+                                    <div class="chat-status" style="float: left; padding-left: 25px; width: 400px;"></div>
+                                    <button type="submit" class="save-profile send-message">Send Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/profile-communication.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle=offcanvas]').click(function() {
+                $('.row-offcanvas').toggleClass('active');
+            });
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block chatScript %}
+    {% set room = 'room-' ~ artist.user.id ~ '-' ~ customer.user.id %}
+    {{ render(controller('ChatBundle:Default:index', { 'sender': app.user, 'target': customer, 'room': room})) }}
+{% endblock chatScript %}

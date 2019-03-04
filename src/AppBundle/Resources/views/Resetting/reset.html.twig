@@ -1,0 +1,67 @@
+<!-- MODAL CREATE NEW PASSWORD -->
+
+<div class="modal fade" id="new-pass" tabindex="-1" role="dialog" aria-labelledby="forgotFormLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+                <div class="title pt-3">Create New Password</div>
+            </div>
+            <div class="modal-body pt-3">
+                {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'id': 'form-reset-pass' } }) }}
+                    <div class="form-group row">
+                        <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                             id="show_hide_password">
+                            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <img src="{{ asset('images/lock.svg') }}" alt="">
+                </span>
+                            </div>
+
+                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control border-right-0', 'placeholder': 'New Password'}, 'id': 'password' }) }}
+
+                            <div class="input-group-append">
+                            <span class="input-group-text show-pwd">
+                                <img src="{{ asset('images/medicine.png') }}" alt="">
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                             id="show_hide_password">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <img src="{{ asset('images/lock.svg') }}" alt="">
+                            </span>
+                            </div>
+
+                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control border-right-0', 'placeholder': 'Confirm New Password'}, 'id': 'confirm-password' }) }}
+
+                            <div class="input-group-append">
+                            <span class="input-group-text show-pwd">
+                                <img src="{{ asset('images/medicine.png') }}" alt="">
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-4">
+                            <button type="submit" class="btn-reset">Create New Password</button>
+                        </div>
+
+                    </div>
+                {{ form_end(form) }}
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#new-pass').modal('show');
+</script>

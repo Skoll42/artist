@@ -1,0 +1,362 @@
+@import "../../module/icons";
+
+.user-profile {
+
+  .chat-area {
+    position: relative;
+
+    .typing-wrapper {
+      position: absolute;
+      bottom: 160px;
+      z-index: 9;
+      font-weight: 300;
+      font-style: italic;
+
+      .typing {
+        display: none;
+      }
+    }
+  }
+
+  &.communication {
+    #main {
+      .title {
+        a {
+          color: #1d2c4d;
+          text-decoration: none;
+        }
+        span {
+          color: $white-red-color;
+
+          i {
+            font-style: normal;
+          }
+        }
+
+        a {
+          &.chat-with {
+            color: #ec2552;
+            text-decoration: none;
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            height: 28px;
+            line-height: 45px;
+          }
+        }
+      }
+
+      hr {
+        margin-bottom: 0;
+      }
+
+      .filter {
+        line-height: 35px;
+        text-align: right;
+
+        a {
+          color: $white-red-color;
+          text-decoration: none;
+
+          &.active, &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .item {
+        display: block;
+        color: $dark-blue-grey-color;
+        padding: 15px 10px;
+        border-bottom: solid 1px $color-blue-gray;
+
+        .user-image {
+          width: 40px;
+          height: 40px;
+          background: no-repeat center;
+          background-size: cover;
+          float: left;
+          margin-right: 25px;
+        }
+
+        .user-name {
+          float: left;
+          line-height: 40px;
+          font-weight: 600;
+          margin-right: 25px;
+          width: 150px;
+          min-width: 150px;
+          min-height: 40px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin-top: -3px;
+        }
+
+        .message {
+          max-width: 380px;
+          min-width: 150px;
+          float: left;
+          line-height: 40px;
+          font-weight: 400;
+          position: relative;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-left: 15px;
+          height: 40px;
+          white-space: nowrap;
+
+          .typing {
+            display: none;
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 380px;;
+            z-index: 1;
+            line-height: 40px;
+            background: #ffffff;
+            font-weight: 300;
+            font-style: italic;
+          }
+        }
+
+        .message-date {
+          float: right;
+          line-height: 40px;
+          color: $color-light-gray;
+          font-weight: 100;
+        }
+
+        &.unread {
+          background-color: #fafafa;
+
+          .message {
+            font-weight: 500;
+
+            .typing {
+              background: #fafafa;
+            }
+
+            &:before {
+              position: absolute;
+              content: ' ';
+              display: block;
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background-color: $white-red-color;
+              top: 17px;
+              left: 0;
+            }
+          }
+        }
+      }
+
+      .chat-wrapper {
+        position: relative;
+        height: 60vh;
+        overflow: hidden;
+        width: 100%;
+
+        @media screen and (max-width: 768px) {
+          height: 30vh;
+        }
+      }
+
+      .chat {
+        width: 100%;
+        position: absolute;
+        overflow: auto;
+        bottom: 0;
+        max-height: 60vh;
+        padding: 15px 0 0;
+
+        @media screen and (max-width: 768px) {
+          max-height: 30vh;
+        }
+
+        /* width */
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          box-shadow: none;
+          border-radius: 3px;
+          background-color: rgba(216, 216, 216, 0.15);
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: $white-red-color;
+          border-radius: 3px;
+        }
+
+        .date-separate {
+          width: 100%;
+          border-bottom: solid 1px $color-blue-gray;
+          position: relative;
+          height: 14px;
+
+          span {
+            background-color: #fff;
+            padding: 5px 15px;
+            width: 140px;
+            color: #a1a1a1;
+            font-weight: 100;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-left: -70px;
+            text-align: center;
+          }
+        }
+
+        .item-self {
+          margin: 15px 0;
+          padding: 15px;
+          border-radius: 3px;
+
+          .user-image {
+            width: 40px;
+            height: 40px;
+            background: no-repeat center;
+            background-size: cover;
+            float: right;
+          }
+
+          .message-body {
+            text-align: right;
+            max-width: 80%;
+            float: right;
+            padding: 5px 15px;
+
+            .user-name {
+              float: right;
+              font-weight: 600;
+              padding-left: 15px;
+              text-align: right;
+              text-decoration: none;
+              color: $dark-blue-grey-color;
+              max-width: 160px;
+              line-height: 14px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+
+            .message-time {
+              float: right;
+              color: $color-light-gray;
+              font-weight: 100;
+              font-size: 11px;
+              line-height: 9px;
+            }
+
+            .message-text {
+              font-weight: 400;
+              margin-top: 8px;
+              word-break: break-all;
+              line-height: 20px;
+            }
+          }
+        }
+
+        .item-from {
+          margin: 15px 0;
+          padding: 15px;
+          border-radius: 3px;
+          background-color: rgba(219, 219, 219, 0.15);
+          position: relative;
+
+          &.unread {
+            :before {
+              position: absolute;
+              content: ' ';
+              display: block;
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background-color: #ec2552;
+              top: 31px;
+              left: 4px;
+            }
+          }
+
+          .user-image {
+            width: 40px;
+            height: 40px;
+            background: no-repeat center;
+            background-size: cover;
+            float: left;
+          }
+
+          .message-body {
+            text-align: left;
+            max-width: 80%;
+            float: left;
+            padding: 5px 15px;
+
+            .user-name {
+              float: left;
+              font-weight: 600;
+              padding-right: 15px;
+              text-decoration: none;
+              color: $dark-blue-grey-color;
+              max-width: 160px;
+              line-height: 14px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              margin-top: -3px;
+            }
+
+            .message-time {
+              float: left;
+              color: $color-light-gray;
+              font-weight: 100;
+              font-size: 11px;
+              line-height: 9px;
+            }
+
+            .message-text {
+              font-weight: 400;
+              margin-top: 8px;
+              word-break: break-all;
+              line-height: 20px;
+            }
+          }
+        }
+
+        div:last-child {
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+
+      .textarea {
+        padding-top: 25px;
+
+        #message {
+          width: 100%;
+          height: 90px;
+          padding: 15px;
+          border-radius: 5px;
+          border: 1px solid $color-blue-gray;
+          resize: none;
+
+          &::placeholder {
+            color: $color-blue-gray;
+          }
+        }
+      }
+
+      .send-message {
+        margin-right: 25px;
+      }
+    }
+  }
+}

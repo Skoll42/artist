@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="search" transform="translate(-745.000000, -29.000000)" fill="#EC2552" fill-rule="nonzero">
+            <g id="search-by-location">
+                <g transform="translate(497.000000, 22.000000)">
+                    <path d="M257.897682,7.11594203 C257.759856,6.96135266 257.535887,6.96135266 257.39806,7.11594203 L253.004833,12.0531401 L248.602992,7.11594203 C248.465165,6.96135266 248.241197,6.96135266 248.10337,7.11594203 C247.965543,7.2705314 247.965543,7.52173913 248.10337,7.6763285 L252.746408,12.884058 C252.815321,12.9613527 252.901463,13 252.996219,13 C253.082361,13 253.177117,12.9613527 253.24603,12.884058 L257.889068,7.6763285 C258.035509,7.52173913 258.035509,7.2705314 257.897682,7.11594203 Z" id="Shape-Copy"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+{% block subject %}Password Reset{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Dear {{ user.username }},
+
+Seems like you forgot your password for the Artist NextDoor. Please, follow the <a href="{{ confirmationUrl|replace({'resetting/reset/': "?reset="}) }}">{{ confirmationUrl|replace({'resetting/reset/': "?reset="}) }}</a> and specify new password.
+
+With best regards,
+Artist NextDoor
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}
+

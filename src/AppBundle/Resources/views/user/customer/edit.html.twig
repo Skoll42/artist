@@ -1,0 +1,173 @@
+{% extends '@App/base.html.twig' %}
+{% form_theme form ':Forms:fields.html.twig' %}
+
+{%- block number_widget -%}
+    {%- set type = type|default('number') -%}
+    {{ block('form_widget_simple') }}
+{%- endblock number_widget -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/customer-profile-edit.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <section class="user-profile">
+
+        <div class="container">
+
+            <div class="row-offcanvas row-offcanvas-left">
+                {% include '@App/controls/user_left_menu.html.twig' %}
+                <div id="main">
+                    <div class="col-md-12">
+                        <p class="d-lg-none">
+                            <button type="button" class="btn" data-toggle="offcanvas">
+                                User Menu
+                            </button>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-12 title">Edit Profile</div>
+                            <hr />
+                        </div>
+
+                        {{ form_start(form, {'method': 'post', 'action': path('customer_edit', {'id': app.user.id}), 'attr': {'id':'customer-edit'}}) }}
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label">Profile Image</div>
+                            <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3">
+                                <div class="profile-img photo-file-widget uploadPhoto" data-preview="true"
+                                     data-img-url="{{ customer.image ? customer.image : asset('images/default_pic.jpg') }}">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-7 col-md-3 col-lg-3">
+                                {{ form_widget(form.imageFile, {'attr': {'class': 'user-photo-input', 'aria-describedby': 'fileHelp'}, 'id': 'user-photo' }) }}
+                                <label class="user-photo-label" for="user-photo">Upload New Photo</label>
+                                <div class="help">
+                                    Maximum size - 10MB. <br />
+                                    JPG or PNG.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10 validate-message validate-message-size text-danger" style="display: none;">
+                                The uploaded image is too large. Please use any image up to 10MB
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10 validate-message validate-message-format text-danger" style="display: none;">
+                                Image format is invalid. Please, use JPG or PNG only!
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label">First Name</div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-input">
+                                {{ form_widget(form.firstName, {'attr': {'class': 'customer-first-name'} }) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label">Last Name</div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-input">
+                                {{ form_widget(form.lastName, {'attr': {'class': 'customer-last-name'} }) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label">Phone Number</div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-input">
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <div class="dropdown" id="country-codes">
+                                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                                {{ form_widget(form.phoneCode, {'attr': {'class': 'customer-phone-code'}, 'id': 'customer-phone-code' }) }}
+                                                <span class="value">
+                                                    {{ form.phoneCode.vars.value ? form.phoneCode.vars.value : '+47' }}
+                                                </span>
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li value="+47">Norway (+47)</li>
+                                                <li value="+46">Sweeden (+46)</li>
+                                                <li value="+79">Danmark (+79)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.phone, {'attr': {'class': 'customer-phone form-control'}, 'id': 'customer-phone' }) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label">About</div>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10 profile-input">
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control-1'}, 'id': 'about-customer' }) }}
+                            </div>
+                        </div>
+
+                        {{ form_end(form) }}
+
+                        <div class="row bottom-profile">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 profile-label"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10 profile-input">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
+                                        <button type="button" class="delete-profile" data-toggle="modal" data-target="#confirmation-delete-modal">
+                                            Delete My Profile
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                                        <button type="submit" class="save-profile customer-main-profile">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!--/row-offcanvas -->
+
+        </div>
+
+    </section>
+
+    <div class="modal fade" id="confirmation-delete-modal" tabindex="-1" role="dialog" aria-labelledby="signinFormLabel">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <img src="{{ asset('images/error.png') }}" alt="">
+                    </a>
+                    <div class="title">{{ 'user.message.confirm.title' | trans }}</div>
+                    <div class="subtitle">{{ 'user.message.confirm.delete' | trans }}</div>
+                    <div class="subtitle">{{ 'user.message.delete' | trans({'%terms_url%': path('terms_and_conditions')}) | raw }}</div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" style="max-width: 160px;" class="btn-confirmation-delete" data-user-id="{{ customer.user.id }}">
+                        {{ 'user.message.confirm.button' | trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/customer-profile-edit.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            new Customer({
+                saveBtn: '.customer-main-profile',
+                form: '#customer-edit',
+            });
+        });
+    </script>
+{% endblock javascripts %}

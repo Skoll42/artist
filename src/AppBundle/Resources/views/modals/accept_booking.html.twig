@@ -1,0 +1,22 @@
+<div class="modal fade" id="confirmation-booking" tabindex="-1" role="dialog" aria-labelledby="signinFormLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+            </div>
+
+            <div class="modal-body">
+
+                <img src="{{ asset('images/icons/green/ok_hover.svg') }}" alt="">
+
+                <div class="title">{{ 'artist.edit.booking.confirm.title' | trans }}</div>
+                <div class="subtitle">{{ 'artist.edit.booking.confirm.subtitle' | trans }}</div>
+
+                <button type="button" class="btn-signup confirmation-booking" data-booking-id="{{ id }}">{{ 'artist.edit.booking.confirm.button' | trans }}</button>
+
+            </div>
+        </div>
+    </div>
+</div>

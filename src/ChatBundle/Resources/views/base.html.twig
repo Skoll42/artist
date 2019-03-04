@@ -1,0 +1,25 @@
+<script src="{{ asset('build/chat.js') }}"></script>
+
+{% if app.user is not null %}
+    <script>
+        {% if is_granted('ROLE_ARTIST') %}
+            {% set senderName = sender.name is defined and sender.name is not empty ? sender.name : '' %}
+            {% set targetName = target is not null ? (target.firstName is not empty and target.lastName is not empty ? target.firstName ~ ' ' ~ target.lastName : target.user.userName) : '' %}
+        {% else %}
+            {% set senderName = sender is not null ? (sender.firstName is not empty and sender.lastName is not empty ? sender.firstName ~ ' ' ~ sender.lastName : sender.user.userName) : '' %}
+            {% set targetName = target.name is defined and target.name is not empty ? target.name : '' %}
+        {% endif %}
+
+        $(document).ready(function() {
+            new App({
+                selfId: '{{ app.user.id }}',
+                senderId: '{{ sender.user.id }}',
+                senderName: '{{ senderName }}',
+                senderImage: '{{ sender.image ? sender.image : asset('images/400x300.png') }}',
+                targetId: '{{ target.user is defined ? target.user.id : 'null' }}',
+                targetName: '{{ targetName }}',
+                targetImage: '{{ target.image is defined and target.image is not empty ? target.image : asset('images/400x300.png') }}'
+            });
+        });
+    </script>
+{% endif %}

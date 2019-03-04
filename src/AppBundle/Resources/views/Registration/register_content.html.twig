@@ -1,0 +1,154 @@
+<!-- MODAL SIGNUP -->
+<div class="modal fade" id="signup-form" tabindex="-1" role="dialog" aria-labelledby="signinFormLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="{{ asset('images/error.png') }}" alt="">
+                </a>
+                <div class="title">Sign Up</div>
+            </div>
+
+            <div class="modal-body">
+                {{ form_start(form, {'method': 'post', 'action': path('registration_register'), 'attr': {'id':'registration'}}) }}
+
+                <div class="form-group row user-type">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label class="container">I am a Customer
+                            <input type="radio" name="user_type" value="customer" id="customer-inp">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label class="container">I am an Artist
+                            <input type="radio" checked="checked" name="user_type" value="artist" id="artist-inp">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group row has-danger" id="mail-group">
+                    <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <img src="{{ asset('images/mail-icon.svg') }}" alt="">
+                </span>
+                        </div>
+
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email Address'}, 'id': 'email' }) }}
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                         id="show_hide_password_first">
+                        <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <img src="{{ asset('images/lock.svg') }}" alt="">
+                </span>
+                        </div>
+
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control border-right-0', 'placeholder': 'Password'}, 'id': 'password' }) }}
+
+                        <div class="input-group-append">
+                            <span class="input-group-text show-pwd">
+                                <img src="{{ asset('images/medicine.png') }}" alt="">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                         id="show_hide_password">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <img src="{{ asset('images/lock.svg') }}" alt="">
+                            </span>
+                        </div>
+
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control border-right-0', 'placeholder': 'Confirm Password'}, 'id': 'confirm-password' }) }}
+
+                        <div class="input-group-append">
+                            <span class="input-group-text show-pwd">
+                                <img src="{{ asset('images/medicine.png') }}" alt="">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!---------------- RECAPTCHA ------------------------->
+                <div class="form-group row">
+                    <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="captcha-box {% if show_captcha_flag == true %} captcha-show {% endif %}">
+                            <div class="g-recaptcha" data-callback="registerRecaptchaCallback" data-sitekey="{{ recaptcha_site_key }}" id="artistcap"></div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------- RECAPTCHA END------------------------->
+
+                <input type="hidden" name="clientTime">
+
+                <button type="submit" id="btn-signup" class="btn-signup">Sign Up</button>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center letter-spacing-05 pt-4 font-12">
+                        <span class="line-height-21">
+                            By clicking &quot;Sign Up&quot; you confirm that you <br>
+                        accept the <a href="{{ path('terms_and_conditions') }}" class="text-red">Terms of Service</a> &amp; <a href="{{ path('privacy_policy') }}" class="text-red">Privacy Policy</a>.
+                        </span>
+                    </div>
+                </div>
+                {#AR-512#}
+                {#<div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="signup-or-separator">
+                            <span class="h6 signup-or-separator--text">or</span>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <button class="btn-fb" id="fb">
+                            <i class="c-icon facebook pull-left" aria-hidden="true"></i>
+                            Sign Up with Facebook
+                        </button>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <button class="btn-gp" id="google">
+                            <i class="c-icon google-plus pull-left" aria-hidden="true"></i>
+                            Sign Up with Google
+                        </button>
+                    </div>
+                </div>#}
+
+                {{ form_end(form) }}
+            </div>
+
+            <div class="modal-footer mt-4">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        Already have an account? <a href="#" class="btn-gst" data-toggle="modal"
+                                                    data-dismiss="modal" data-target="#login-form">Log
+                            In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //inserted RECAPTCHA callback function here just RECAPCTHA API can 'see' it
+    function registerRecaptchaCallback() {
+        return new Promise(function(resolve, reject) {
+            if (grecaptcha && grecaptcha.getResponse().length > 0 && document.getElementsByClassName('invalid-feedback').length > 0) {
+                document.getElementsByClassName('invalid-feedback')[0].innerHTML = '';
+            }
+            resolve();
+        });
+    }
+</script>
